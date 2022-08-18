@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from numpy import true_divide
 from sensor import AnalogicalSensor, DigitalSensor, JSONSensor
 
 SENSORS = [
@@ -8,7 +9,7 @@ SENSORS = [
 
     DigitalSensor(_id="4", name="Humidity", value=30),
     DigitalSensor(_id="5", name="Temperature", value=30),
-    DigitalSensor(_id="6", name="Soil Moisture", value=30),
+    DigitalSensor(_id="6", name="Soil Moisture", value=5),
 
     JSONSensor(_id="7", name="Bird1 Health", value={"hb": 35, "body_tem": 35}),
     JSONSensor(_id="8", name="Bird2 Health", value={"hb": 35, "body_tem": 35}),
@@ -22,9 +23,26 @@ SENSORS = [
     AnalogicalSensor(_id="14", name="Body Temperature Alarm", value=False),
     AnalogicalSensor(_id="15", name="Boundaries Alarm", value=False),
     AnalogicalSensor(_id="16", name="Humidity Alarm", value=False),
-    AnalogicalSensor(_id="17", name="Humidity Alarm", value=False),
-    AnalogicalSensor(_id="18", name="Soil Moisture Alarm", value=False),
+    AnalogicalSensor(_id="17", name="Soil Moisture Alarm", value=False),
 ]
+
+
+def exists(sensor_id) -> bool:
+    try:
+        next(
+            sensor for sensor in SENSORS
+            if sensor._id == sensor_id
+        )
+        return True
+    except StopIteration:
+        return False
+
+
+def get_sensor(sensor_id):
+    return next(
+        sensor for sensor in SENSORS
+        if sensor._id == sensor_id
+    )
 
 
 def randomize():

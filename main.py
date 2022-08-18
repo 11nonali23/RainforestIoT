@@ -7,5 +7,5 @@ if __name__ == "__main__":
     server.start()
 
     ui = Ui()
-    ui.update(server)
+    ui.update()
     ui.mainloop()

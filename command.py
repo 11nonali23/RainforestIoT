@@ -1,8 +1,12 @@
+from available_sensors import exists
+
+
 AVAILABLE_ACTIONS = ["GET", "SET"]
 
 
 class Command:
     def __init__(self, data: str, sensors):
+        self.error_message = "ERRORS: "
         self._parse(data)
         self._validate(sensors)
 
@@ -13,9 +17,13 @@ class Command:
         self.value = data[2] if 2 < len(data) else None
 
     def _validate(self, sensors):
-        sensor_exists = any(sensor._id == self.sensor_id for sensor in sensors)
-        # do something for the value
-        self.valid = sensor_exists and self.action in AVAILABLE_ACTIONS
+        self.valid = True
+        if not self.action in AVAILABLE_ACTIONS:
+            self.error_message += "- invalid action "
+            self.valid = False
+        if not exists(self.sensor_id):
+            self.error_message += "- invalid sensor id"
+            self.valid = False
 
     def __str__(self) -> str:
         return f"Command({self.action}, {self.sensor_id})"

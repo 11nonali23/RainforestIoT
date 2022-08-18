@@ -2,7 +2,7 @@ import socket
 import selectors
 import types
 import threading
-from available_sensors import SENSORS
+from available_sensors import SENSORS, exists, get_sensor
 
 from command import Command
 
@@ -68,19 +68,12 @@ class Server(threading.Thread):
         command = Command(data, SENSORS)
 
         if not command.valid:
-            data_outb += str.encode("ERROR - invalid command or sensor")
+            data_outb += str.encode(command.error_message)
+            return data_outb
 
-        # Handle the stop iteration exception ?
-        sensor = next(
-            sensor for sensor in SENSORS
-            if sensor._id == command.sensor_id
-        )
+        sensor = get_sensor(command.sensor_id)
         result = sensor.do(command)
-
         data_outb += str.encode(result)
-        print("This is the request data:", command)
-        print("This is the resulting data:", result)
-
         return data_outb
 
     def _send_close_connection_signal(self, sock):

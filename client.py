@@ -5,7 +5,7 @@ import selectors
 import types
 
 sel = selectors.DefaultSelector()
-messages = [b"GET 11"]
+messages = [b"fasdfsfsdaf 454544"]
 
 
 def start_connections(host, port, num_conns):

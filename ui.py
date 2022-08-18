@@ -3,8 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 from turtle import update
 
-from pip import main
-from server import Server
+from available_sensors import SENSORS
 
 
 class Ui(tk.Tk):
@@ -20,21 +19,17 @@ class Ui(tk.Tk):
         self.label1 = tk.Label(windows)
         self.label1.grid(column=0, row=1)
 
-        self.custom_button = ttk.Button(
-            windows,
-            text="Click on me",
-            command=self._clicked
+        self.label2 = tk.Label(windows)
+        self.label2.grid(column=0, row=2)
+
+    def update(self):
+        self._update_data()
+        self.after(2000, self.update)
+
+    def _update_data(self):
+        self.label1.configure(
+            text=f'User Presence Sensor value {SENSORS[0].value}'
         )
-        self.custom_button.grid(column=1, row=0)
-
-    def update(self, server):
-        self._update_data(server.count)
-        self.after(2000, self.update, server)
-
-    def _update_data(self, data):
-        self.count = data
-        self.label1.configure(text=f'Button was clicked {self.count} times!!!')
-
-    def _clicked(self):
-        self.count = self.count + 1
-        self.label1.configure(text=f'Button was clicked {self.count} times!!!')
+        self.label2.configure(
+            text=f'Water Vaporizer value {SENSORS[1].value}'
+        )
