@@ -51,4 +51,4 @@ def randomize():
         if isinstance(sensor, AnalogicalSensor):
             pass  # randomize value
         if isinstance(sensor, JSONSensor):
-            pass  # randomize value
+            pass  # randomize json

@@ -1,5 +1,5 @@
 from server import Server
-from ui import App
+from ui.base import App
 
 
 if __name__ == "__main__":
