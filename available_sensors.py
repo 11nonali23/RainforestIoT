@@ -1,5 +1,3 @@
-from django.http import JsonResponse
-from numpy import true_divide
 from sensor import AnalogicalSensor, DigitalSensor, JSONSensor
 
 SENSORS = [
