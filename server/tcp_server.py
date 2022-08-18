@@ -2,9 +2,9 @@ import socket
 import selectors
 import types
 import threading
-from available_sensors import SENSORS, exists, get_sensor
 
-from command import Command
+from sensors.available_sensors import SENSORS, get_sensor
+from server.command import Command
 
 sel = selectors.DefaultSelector()
 

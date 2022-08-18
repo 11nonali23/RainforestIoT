@@ -1,4 +1,4 @@
-from available_sensors import exists
+from sensors.available_sensors import exists
 
 
 AVAILABLE_ACTIONS = ["GET", "SET"]

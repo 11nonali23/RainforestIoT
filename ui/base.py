@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 import tkinter as tk
 from tkinter import ttk
 
-from available_sensors import SENSORS
+from sensors.available_sensors import SENSORS
 from ui.tabs import AnimalsUI, EnvironmentUI
 
 

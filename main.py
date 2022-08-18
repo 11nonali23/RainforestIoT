@@ -1,4 +1,4 @@
-from server import Server
+from server.tcp_server import Server
 from ui.base import App
 
 

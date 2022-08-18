@@ -1,4 +1,4 @@
-from sensor import AnalogicalSensor, DigitalSensor, JSONSensor
+from sensors.sensor import AnalogicalSensor, DigitalSensor, JSONSensor
 
 SENSORS = [
     AnalogicalSensor(_id="1", name="User Presence", value=True),
