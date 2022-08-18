@@ -1,11 +1,11 @@
 from server import Server
-from ui import Ui
+from ui import App
 
 
 if __name__ == "__main__":
     server = Server()
     server.start()
 
-    ui = Ui()
-    ui.update()
-    ui.mainloop()
+    app = App()
+    app.update()
+    app.mainloop()
