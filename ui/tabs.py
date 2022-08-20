@@ -105,6 +105,22 @@ class EnvironmentUI(TabUI):
         )
         self.humidity_value.grid(column=1, row=3, sticky=tk.W, padx=5, pady=5)
 
+        self.soil_moisture_level = tk.Label(
+            tab,
+            text="Soil Moisture Level"
+        )
+        self.soil_moisture_level.grid(
+            column=1, row=4, sticky=tk.W, padx=5, pady=5
+        )
+
+        self.soil_moisture_value = tk.Label(
+            tab,
+            text="30.0"
+        )
+        self.soil_moisture_value.grid(
+            column=1, row=5, sticky=tk.W, padx=5, pady=5
+        )
+
 
 class AnimalsUI(TabUI):
     def __init__(self, tab: tk.Frame) -> None:
