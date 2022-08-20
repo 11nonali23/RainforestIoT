@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import tkinter as tk
+from tkinter import ttk
 
 from ui.components import DigitalEntry, OnOffSwtich
 
@@ -53,11 +54,21 @@ class EnvironmentUI(TabUI):
             column=0, row=3, sticky=tk.W, padx=5, pady=5
         )
 
+        self.left_separator = ttk.Separator(
+            master=tab,
+            style='blue.TSeparator',
+            class_=ttk.Separator,
+            takefocus=1,
+            cursor='plus'
+        )
+        self.left_separator.grid(row=5, column=0, ipadx=200, pady=10)
+
         self.irrigator_label = tk.Label(
             tab,
             text="Irrigator"
         )
-        self.irrigator_label.grid(column=0, row=4, sticky=tk.W, padx=5, pady=5)
+        self.irrigator_label.grid(
+            column=0, row=6, sticky=tk.W, padx=5, pady=5)
 
         self.irrigator_switch = OnOffSwtich(
             self.tab,
@@ -65,19 +76,19 @@ class EnvironmentUI(TabUI):
             custom_callback=lambda: None
         )
         self.irrigator_switch.switch_button.grid(
-            column=0, row=5, sticky=tk.W, padx=5, pady=5
+            column=0, row=7, sticky=tk.W, padx=5, pady=5
         )
         self.irrigator_label = tk.Label(
             tab,
             text="Irrigator Power"
-        ).grid(column=0, row=6, sticky=tk.W, padx=5, pady=5)
+        ).grid(column=0, row=8, sticky=tk.W, padx=5, pady=5)
 
         self.irrigator_power = DigitalEntry(
             self.tab,
             value=30.0
         )
         self.irrigator_power.entry.grid(
-            column=0, row=7, sticky=tk.W, padx=5, pady=5
+            column=0, row=9, sticky=tk.W, padx=5, pady=5
         )
 
     def _build_right_column(self, tab):
@@ -105,12 +116,21 @@ class EnvironmentUI(TabUI):
         )
         self.humidity_value.grid(column=1, row=3, sticky=tk.W, padx=5, pady=5)
 
+        self.right_separator = ttk.Separator(
+            master=tab,
+            style='blue.TSeparator',
+            class_=ttk.Separator,
+            takefocus=1,
+            cursor='plus'
+        )
+        self.right_separator.grid(row=5, column=1, ipadx=200, pady=0)
+
         self.soil_moisture_level = tk.Label(
             tab,
             text="Soil Moisture Level"
         )
         self.soil_moisture_level.grid(
-            column=1, row=4, sticky=tk.W, padx=5, pady=5
+            column=1, row=7, sticky=tk.W, padx=5, pady=5
         )
 
         self.soil_moisture_value = tk.Label(
@@ -118,7 +138,7 @@ class EnvironmentUI(TabUI):
             text="30.0"
         )
         self.soil_moisture_value.grid(
-            column=1, row=5, sticky=tk.W, padx=5, pady=5
+            column=1, row=8, sticky=tk.W, padx=5, pady=5
         )
 
 
