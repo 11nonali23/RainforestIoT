@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 import tkinter as tk
 from tkinter import ttk
+from sensors.available_sensors import SENSORS
+
 
 from ui.components import DigitalEntry, OnOffSwtich
 
@@ -35,7 +37,7 @@ class EnvironmentUI(TabUI):
 
         self.vaporizer_switch = OnOffSwtich(
             self.tab,
-            is_on=False,
+            is_on=SENSORS[1].value,
             custom_callback=lambda: None
         )
         self.vaporizer_switch.switch_button.grid(
@@ -46,9 +48,10 @@ class EnvironmentUI(TabUI):
             text="Vaporizer Power"
         ).grid(column=0, row=2, sticky=tk.W, padx=5, pady=5)
 
+        # TODO digital entry callbacks
         self.vaporizer_power = DigitalEntry(
             self.tab,
-            value=30.0
+            value=SENSORS[2].value
         )
         self.vaporizer_power.entry.grid(
             column=0, row=3, sticky=tk.W, padx=5, pady=5
@@ -72,7 +75,7 @@ class EnvironmentUI(TabUI):
 
         self.irrigator_switch = OnOffSwtich(
             self.tab,
-            is_on=False,
+            is_on=SENSORS[3].value,
             custom_callback=lambda: None
         )
         self.irrigator_switch.switch_button.grid(
@@ -85,7 +88,7 @@ class EnvironmentUI(TabUI):
 
         self.irrigator_power = DigitalEntry(
             self.tab,
-            value=30.0
+            value=SENSORS[4].value
         )
         self.irrigator_power.entry.grid(
             column=0, row=9, sticky=tk.W, padx=5, pady=5
@@ -100,7 +103,7 @@ class EnvironmentUI(TabUI):
 
         self.presence_value = tk.Label(
             tab,
-            text="Present"
+            text="Present" if SENSORS[0].value else "Not Present"
         )
         self.presence_value.grid(column=1, row=1, sticky=tk.W, padx=5, pady=5)
 
@@ -112,7 +115,7 @@ class EnvironmentUI(TabUI):
 
         self.humidity_value = tk.Label(
             tab,
-            text="30.0"
+            text=SENSORS[5].value
         )
         self.humidity_value.grid(column=1, row=3, sticky=tk.W, padx=5, pady=5)
 
@@ -135,7 +138,7 @@ class EnvironmentUI(TabUI):
 
         self.soil_moisture_value = tk.Label(
             tab,
-            text="30.0"
+            text=SENSORS[6].value
         )
         self.soil_moisture_value.grid(
             column=1, row=8, sticky=tk.W, padx=5, pady=5
