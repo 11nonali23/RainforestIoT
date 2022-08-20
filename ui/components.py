@@ -65,16 +65,16 @@ class DigitalEntry:
 
 class AnimalInformations:
 
-    def __init__(self, tab: tk.Frame, health_sensor: Sensor, gps_sensor: Sensor, start_row: int):
+    def __init__(self, tab: tk.Frame, health_sensor: Sensor, gps_sensor: Sensor, start_row: int, bird_num: int):
         self.tab = tab
         self.health_sensor = health_sensor
         self.gps_sensor = gps_sensor
-        self._build(start_row)
+        self._build(start_row, bird_num)
 
-    def _build(self, start_row):
+    def _build(self, start_row, bird_num):
         self.title = Title(
             self.tab,
-            text="Bird Informations"
+            text=f"Bird{bird_num} Informations"
         )
         self.title.label.grid(column=0, row=start_row,
                               sticky=tk.W, padx=5, pady=5)

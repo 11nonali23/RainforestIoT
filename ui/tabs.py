@@ -80,7 +80,7 @@ class EnvironmentUI(TabUI):
 
         self.irrigator_switch = OnOffSwtich(
             self.tab,
-            SENSORS[4]
+            SENSORS[3]
         )
         self.irrigator_switch.switch_button.grid(
             column=0, row=7, sticky=tk.W, padx=5, pady=5
@@ -158,9 +158,15 @@ class AnimalsUI(TabUI):
         super().__init__(tab)
 
     def _generateUI(self, tab: tk.Frame):
-        AnimalInformations(
-            self.tab,
-            SENSORS[8],
-            SENSORS[11],
-            0
-        )
+        sensors_pos = [7, 8, 9]
+        # TODO find a more elgant way
+        offset = 0
+        for index, pos in enumerate(sensors_pos):
+            AnimalInformations(
+                self.tab,
+                SENSORS[pos],
+                SENSORS[pos + 3],
+                index + offset,
+                index
+            )
+            offset = offset + 4
