@@ -22,6 +22,10 @@ class EnvironmentUI(TabUI):
     def _generateUI(self, tab: tk.Frame):
         tab.columnconfigure(0, weight=1)
         tab.columnconfigure(1, weight=1)
+        self._build_left_column(tab)
+        self._build_right_column(tab)
+
+    def _build_left_column(self, tab):
         self.vaporize_label = tk.Label(
             tab,
             text="Water Vaporizer"
@@ -49,6 +53,7 @@ class EnvironmentUI(TabUI):
             column=0, row=3, sticky=tk.W, padx=5, pady=5
         )
 
+    def _build_right_column(self, tab):
         self.presence_label = tk.Label(
             tab,
             text="User Presence"
@@ -72,9 +77,6 @@ class EnvironmentUI(TabUI):
             text="30.0"
         )
         self.humidity_value.grid(column=1, row=3, sticky=tk.W, padx=5, pady=5)
-
-        # TODO self.separator = ttk.Separator(self.tab, orient='horizontal')
-        #self.separator.grid(row=4, sticky=tk.W, padx=5, pady=5)
 
 
 class AnimalsUI(TabUI):
