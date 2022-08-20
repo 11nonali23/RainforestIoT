@@ -1,6 +1,7 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 from dataclasses import dataclass
 import json
+from random import randrange
 
 
 @dataclass
@@ -23,15 +24,28 @@ class Sensor(ABC):
             return self.set_value(command.value)
         return "ERROR - invalid message"
 
+    @abstractmethod
+    def randomize(self, rule):
+        pass
+
 
 @dataclass
 class AnalogicalSensor(Sensor):
     value: bool
 
+    def randomize(self, rule):
+        self.set_value(
+            randrange(rule["range"]) == 0
+        )
+
 
 @dataclass
 class DigitalSensor(Sensor):
     value: float
+
+    def randomize(self, rule):
+        ranges = rule["range"]
+        self.set_value(randrange(ranges[0], ranges[1]))
 
 
 @dataclass
@@ -40,3 +54,25 @@ class JSONSensor(Sensor):
 
     def get_value_str(self) -> str:
         return json.dumps(self.value)
+
+
+class HealthSensor(JSONSensor):
+
+    def randomize(self, rule):
+        hb_range = rule["hb"]
+        body_tem_range = rule["body_tem"]
+        self.set_value({
+            "hb": randrange(hb_range[0], hb_range[1]),
+            "body_tem": randrange(body_tem_range[0], body_tem_range[1])
+        })
+
+
+class GPSSensor(JSONSensor):
+
+    def randomize(self, rule):
+        lat_range = rule["lat"]
+        lon_range = rule["lon"]
+        self.set_value({
+            "lat": randrange(lat_range[0], lat_range[1]),
+            "lon": randrange(lon_range[0], lon_range[1])
+        })

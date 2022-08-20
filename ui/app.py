@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 import tkinter as tk
 from tkinter import ttk
 
-from sensors.available_sensors import SENSORS
+from sensors.available_sensors import SENSORS, randomize
 from ui.tabs import AnimalsUI, EnvironmentUI
 
 
@@ -29,6 +29,7 @@ class App(tk.Tk):
     def update(self):
         self._update_data()
         self.after(2000, self.update)
+        self.after(5000, randomize)
 
     def _update_data(self):
         self.environmentUI.presence_value.configure(

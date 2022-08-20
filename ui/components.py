@@ -1,6 +1,12 @@
+from abc import ABC
 import tkinter as tk
 
 from sensors.sensor import Sensor
+
+
+class TabComponent(ABC):
+    # Here I can define a hierarchy for every component, 'cause they need similar things
+    pass
 
 
 class Title:
