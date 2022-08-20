@@ -16,9 +16,8 @@ class App(tk.Tk):
 
         tabControl = ttk.Notebook(window)
         tab_environment = tk.Frame(tabControl)
-        tab_animals = tk.Frame(tabControl)
-
         tabControl.add(tab_environment, text='Environment')
+        tab_animals = tk.Frame(tabControl)
         tabControl.add(tab_animals, text='Animals')
         tabControl.pack(expand=1, fill="both")
 
