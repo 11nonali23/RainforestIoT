@@ -10,21 +10,21 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        window = tk.Toplevel()
-        window.title("Rainforest Application")
-        window.geometry("1300x700")
+        self.window = tk.Toplevel()
+        self.window.title("Rainforest Application")
+        self.window.geometry("1300x700")
 
-        tabControl = ttk.Notebook(window)
-        tab_environment = tk.Frame(tabControl)
-        tabControl.add(tab_environment, text='Environment')
-        tab_animals = tk.Frame(tabControl)
-        tabControl.add(tab_animals, text='Animals')
-        tabControl.pack(expand=1, fill="both")
+        self.tabControl = ttk.Notebook(self.window)
+        self.tab_environment = tk.Frame(self.tabControl)
+        self.tabControl.add(self.tab_environment, text='Environment')
+        self.tab_animals = tk.Frame(self.tabControl)
+        self.tabControl.add(self.tab_animals, text='Animals')
+        self.tabControl.pack(expand=1, fill="both")
 
         # Set other parts of UI in another class/method
         # I should use dependency injection......
-        self.environmentUI = EnvironmentUI(tab_environment)
-        self.animalsUI = AnimalsUI(tab_animals)
+        self.environmentUI = EnvironmentUI(self.tab_environment)
+        self.animalsUI = AnimalsUI(self.tab_animals)
 
     def update(self):
         self._update_data()
