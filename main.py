@@ -1,5 +1,5 @@
 from server.tcp_server import Server
-from ui.base import App
+from ui.app import App
 
 
 if __name__ == "__main__":
