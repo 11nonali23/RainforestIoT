@@ -8,7 +8,7 @@ class Sensor(ABC):
     _id: str
     name: str
 
-    def get_value(self) -> str:
+    def get_value_str(self) -> str:
         return str(self.value)
 
     def set_value(self, value: bool) -> str:
@@ -18,7 +18,7 @@ class Sensor(ABC):
 
     def do(self, command):
         if command.action == "GET":
-            return self.get_value()
+            return self.get_value_str()
         if command.action == "SET":
             return self.set_value(command.value)
         return "ERROR - invalid message"
@@ -38,5 +38,5 @@ class DigitalSensor(Sensor):
 class JSONSensor(Sensor):
     value: dict
 
-    def get_value(self) -> str:
+    def get_value_str(self) -> str:
         return json.dumps(self.value)
