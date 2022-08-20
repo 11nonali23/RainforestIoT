@@ -1,33 +1,36 @@
 import tkinter as tk
 
+from sensors.sensor import Sensor
+
 
 class OnOffSwtich():
 
-    def __init__(self, tab: tk.Frame, is_on: bool, custom_callback):
+    def __init__(self, tab: tk.Frame, sensor: Sensor):
         self.tab = tab
-        self.is_on = is_on
-        self.custom_callback = custom_callback
+        self.sensor = sensor
         self.on_image = tk.PhotoImage(file="ui/images/on.png")
         self.off_image = tk.PhotoImage(file="ui/images/off.png")
 
         self.switch_button = tk.Button(
             self.tab,
-            image=self.on_image if is_on else self.off_image,
+            image=self.on_image if self.is_on() else self.off_image,
             bd=0,
             command=self._callback
         )
 
+    def is_on(self):
+        return self.sensor.value
+
     def _callback(self):
         self._default_callback()
-        self.custom_callback()
 
     def _default_callback(self):
-        if self.is_on:
+        if self.is_on():
             self.switch_button.config(image=self.off_image)
-            self.is_on = False
+            self.sensor.value = False
         else:
             self.switch_button.config(image=self.on_image)
-            self.is_on = True
+            self.sensor.value = True
 
 
 # entry should then set the value

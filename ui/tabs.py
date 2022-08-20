@@ -37,8 +37,7 @@ class EnvironmentUI(TabUI):
 
         self.vaporizer_switch = OnOffSwtich(
             self.tab,
-            is_on=SENSORS[1].value,
-            custom_callback=lambda: None
+            SENSORS[1]
         )
         self.vaporizer_switch.switch_button.grid(
             column=0, row=1, sticky=tk.W, padx=5, pady=5
@@ -75,8 +74,7 @@ class EnvironmentUI(TabUI):
 
         self.irrigator_switch = OnOffSwtich(
             self.tab,
-            is_on=SENSORS[3].value,
-            custom_callback=lambda: None
+            SENSORS[4]
         )
         self.irrigator_switch.switch_button.grid(
             column=0, row=7, sticky=tk.W, padx=5, pady=5

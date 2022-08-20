@@ -32,10 +32,6 @@ class App(tk.Tk):
         self.after(2000, self.update)
 
     def _update_data(self):
-        # self.label1.configure(
-        #     text=f'User Presence Sensor value {SENSORS[0].value}'
-        # )
-        # self.label2.configure(
-        #     text=f'Water Vaporizer value {SENSORS[1].value}'
-        # )
-        pass
+        self.environmentUI.presence_value.configure(
+            text="Present" if SENSORS[0].value else "Not Present"
+        )
