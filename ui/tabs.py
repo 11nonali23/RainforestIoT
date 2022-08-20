@@ -4,7 +4,7 @@ from tkinter import ttk
 from sensors.available_sensors import SENSORS
 
 
-from ui.components import DigitalEntry, OnOffSwtich
+from ui.components import AnimalInformations, DigitalEntry, OnOffSwtich, Title
 
 
 class TabUI(ABC):
@@ -29,11 +29,13 @@ class EnvironmentUI(TabUI):
         self._build_right_column(tab)
 
     def _build_left_column(self, tab):
-        self.vaporize_label = tk.Label(
+        self.vaporize_title = Title(
             tab,
             text="Water Vaporizer"
         )
-        self.vaporize_label.grid(column=0, row=0, sticky=tk.W, padx=5, pady=5)
+        self.vaporize_title.label.grid(
+            column=0, row=0, sticky=tk.W, padx=5, pady=5
+        )
 
         self.vaporizer_switch = OnOffSwtich(
             self.tab,
@@ -42,10 +44,13 @@ class EnvironmentUI(TabUI):
         self.vaporizer_switch.switch_button.grid(
             column=0, row=1, sticky=tk.W, padx=5, pady=5
         )
-        self.vaporize_label = tk.Label(
+        self.vaporize_power_label = tk.Label(
             tab,
             text="Vaporizer Power"
-        ).grid(column=0, row=2, sticky=tk.W, padx=5, pady=5)
+        )
+        self.vaporize_power_label.grid(
+            column=0, row=2, sticky=tk.W, padx=5, pady=5
+        )
 
         # TODO digital entry callbacks
         self.vaporizer_power = DigitalEntry(
@@ -65,12 +70,13 @@ class EnvironmentUI(TabUI):
         )
         self.left_separator.grid(row=5, column=0, ipadx=200, pady=10)
 
-        self.irrigator_label = tk.Label(
+        self.irrigator_title = Title(
             tab,
             text="Irrigator"
         )
-        self.irrigator_label.grid(
-            column=0, row=6, sticky=tk.W, padx=5, pady=5)
+        self.irrigator_title.label.grid(
+            column=0, row=6, sticky=tk.W, padx=5, pady=5
+        )
 
         self.irrigator_switch = OnOffSwtich(
             self.tab,
@@ -93,11 +99,13 @@ class EnvironmentUI(TabUI):
         )
 
     def _build_right_column(self, tab):
-        self.presence_label = tk.Label(
+        self.presence_title = Title(
             tab,
             text="User Presence"
         )
-        self.presence_label.grid(column=1, row=0, sticky=tk.W, padx=5, pady=5)
+        self.presence_title.label.grid(
+            column=1, row=0, sticky=tk.W, padx=5, pady=5
+        )
 
         self.presence_value = tk.Label(
             tab,
@@ -105,11 +113,13 @@ class EnvironmentUI(TabUI):
         )
         self.presence_value.grid(column=1, row=1, sticky=tk.W, padx=5, pady=5)
 
-        self.humidity_level = tk.Label(
+        self.humidity_level = Title(
             tab,
             text="Humidity Level"
         )
-        self.humidity_level.grid(column=1, row=2, sticky=tk.W, padx=5, pady=5)
+        self.humidity_level.label.grid(
+            column=1, row=2, sticky=tk.W, padx=5, pady=5
+        )
 
         self.humidity_value = tk.Label(
             tab,
@@ -126,11 +136,11 @@ class EnvironmentUI(TabUI):
         )
         self.right_separator.grid(row=5, column=1, ipadx=200, pady=0)
 
-        self.soil_moisture_level = tk.Label(
+        self.soil_moisture_level = Title(
             tab,
             text="Soil Moisture Level"
         )
-        self.soil_moisture_level.grid(
+        self.soil_moisture_level.label.grid(
             column=1, row=7, sticky=tk.W, padx=5, pady=5
         )
 
@@ -148,7 +158,9 @@ class AnimalsUI(TabUI):
         super().__init__(tab)
 
     def _generateUI(self, tab: tk.Frame):
-        tk.Label(
-            tab,
-            text="Qui ci metti le altre hose"
-        ).grid(column=0, row=0, padx=30, pady=30)
+        AnimalInformations(
+            self.tab,
+            SENSORS[8],
+            SENSORS[11],
+            0
+        )

@@ -3,7 +3,22 @@ import tkinter as tk
 from sensors.sensor import Sensor
 
 
-class OnOffSwtich():
+class Title:
+
+    def __init__(self, tab: tk.Frame, text: str):
+        self.tab = tab
+        self.text = text
+        self._build()
+
+    def _build(self):
+        self.label = tk.Label(
+            self.tab,
+            text=self.text,
+            font=("Arial", 17)
+        )
+
+
+class OnOffSwtich:
 
     def __init__(self, tab: tk.Frame, sensor: Sensor):
         self.tab = tab
@@ -57,11 +72,12 @@ class AnimalInformations:
         self._build(start_row)
 
     def _build(self, start_row):
-        self.title = tk.Label(
+        self.title = Title(
             self.tab,
             text="Bird Informations"
         )
-        self.title.grid(column=0, row=start_row, sticky=tk.W, padx=5, pady=5)
+        self.title.label.grid(column=0, row=start_row,
+                              sticky=tk.W, padx=5, pady=5)
 
         self.heart_beat = tk.Label(
             self.tab,
