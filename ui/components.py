@@ -43,3 +43,9 @@ class DigitalEntry:
         )
         self.entry.insert(0, value)
         self.entry.grid(column=0, row=4, sticky=tk.W, padx=5, pady=5)
+
+
+class SensorController:
+
+    def __init__(self) -> None:
+        pass

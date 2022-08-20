@@ -53,6 +53,33 @@ class EnvironmentUI(TabUI):
             column=0, row=3, sticky=tk.W, padx=5, pady=5
         )
 
+        self.irrigator_label = tk.Label(
+            tab,
+            text="Irrigator"
+        )
+        self.irrigator_label.grid(column=0, row=4, sticky=tk.W, padx=5, pady=5)
+
+        self.irrigator_switch = OnOffSwtich(
+            self.tab,
+            is_on=False,
+            custom_callback=lambda: None
+        )
+        self.irrigator_switch.switch_button.grid(
+            column=0, row=5, sticky=tk.W, padx=5, pady=5
+        )
+        self.irrigator_label = tk.Label(
+            tab,
+            text="Irrigator Power"
+        ).grid(column=0, row=6, sticky=tk.W, padx=5, pady=5)
+
+        self.irrigator_power = DigitalEntry(
+            self.tab,
+            value=30.0
+        )
+        self.irrigator_power.entry.grid(
+            column=0, row=7, sticky=tk.W, padx=5, pady=5
+        )
+
     def _build_right_column(self, tab):
         self.presence_label = tk.Label(
             tab,
