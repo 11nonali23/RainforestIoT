@@ -46,3 +46,42 @@ class DigitalEntry:
         )
         self.entry.insert(0, value)
         self.entry.grid(column=0, row=4, sticky=tk.W, padx=5, pady=5)
+
+
+class AnimalInformations:
+
+    def __init__(self, tab: tk.Frame, health_sensor: Sensor, gps_sensor: Sensor, start_row: int):
+        self.tab = tab
+        self.health_sensor = health_sensor
+        self.gps_sensor = gps_sensor
+        self._build(start_row)
+
+    def _build(self, start_row):
+        self.title = tk.Label(
+            self.tab,
+            text="Bird Informations"
+        )
+        self.title.grid(column=0, row=start_row, sticky=tk.W, padx=5, pady=5)
+
+        self.heart_beat = tk.Label(
+            self.tab,
+            text=f"heart beat: {self.health_sensor.value.get('hb')}"
+        )
+        self.heart_beat.grid(column=0, row=start_row + 1,
+                             sticky=tk.W, padx=5, pady=5)
+
+        self.body_temperature = tk.Label(
+            self.tab,
+            text=f"body temperature: {self.health_sensor.value.get('body_tem')}"
+        )
+        self.body_temperature.grid(
+            column=0, row=start_row + 2, sticky=tk.W, padx=5, pady=5
+        )
+
+        self.location = tk.Label(
+            self.tab,
+            text=f"location: {self.gps_sensor.value.get('lat')} lat - {self.gps_sensor.value.get('lon')} lon"
+        )
+        self.location.grid(
+            column=0, row=start_row + 3, sticky=tk.W, padx=5, pady=5
+        )
