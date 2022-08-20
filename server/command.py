@@ -14,7 +14,10 @@ class Command:
         data = data.split(" ")
         self.action = data[0]
         self.sensor_id = data[1]
-        self.value = self._parse_value(data[2])
+        try:
+            self.value = self._parse_value(data[2])
+        except IndexError:
+            self.value = False
 
     def _validate(self):
         self.valid = True
