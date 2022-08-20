@@ -2,7 +2,7 @@ from sensors.sensor import AnalogicalSensor, DigitalSensor, JSONSensor
 
 SENSORS = [
     AnalogicalSensor(_id="1", name="User Presence", value=True),
-    AnalogicalSensor(_id="2", name="Water Vaporizer", value=False),
+    AnalogicalSensor(_id="2", name="Water Vaporizer", value=True),
     DigitalSensor(_id="3", name="Vaporizer Power", value=30),
     AnalogicalSensor(_id="4", name="Irrigators", value=False),
     DigitalSensor(_id="5", name="Irrigator Power", value=30),
