@@ -32,6 +32,5 @@ class App(tk.Tk):
         self.after(5000, randomize)
 
     def _update_data(self):
-        self.environmentUI.presence_value.configure(
-            text="Present" if SENSORS[0].value else "Not Present"
-        )
+        self.environmentUI.update()
+        self.animalsUI.update()

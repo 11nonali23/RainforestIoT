@@ -42,10 +42,13 @@ class OnOffSwtich:
     def is_on(self):
         return self.sensor.value
 
-    def _callback(self):
-        self._default_callback()
+    def update(self):
+        if self.is_on():
+            self.switch_button.config(image=self.on_image)
+        else:
+            self.switch_button.config(image=self.off_image)
 
-    def _default_callback(self):
+    def _callback(self):
         if self.is_on():
             self.switch_button.config(image=self.off_image)
             self.sensor.value = False
@@ -106,4 +109,15 @@ class AnimalInformations:
         )
         self.location.grid(
             column=0, row=start_row + 3, sticky=tk.W, padx=5, pady=5
+        )
+
+    def update(self):
+        self.heart_beat.configure(
+            text=f"heart beat: {self.health_sensor.value.get('hb')}"
+        )
+        self.body_temperature.configure(
+            text=f"body temperature: {self.health_sensor.value.get('body_tem')}"
+        )
+        self.location.configure(
+            text=f"location: {self.gps_sensor.value.get('lat')} lat - {self.gps_sensor.value.get('lon')} lon"
         )

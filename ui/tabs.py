@@ -13,7 +13,11 @@ class TabUI(ABC):
         self._generateUI(tab)
 
     @abstractmethod
-    def _generateUI():
+    def _generateUI(self, tab):
+        pass
+
+    @abstractmethod
+    def update(self):
         pass
 
 
@@ -152,21 +156,39 @@ class EnvironmentUI(TabUI):
             column=1, row=8, sticky=tk.W, padx=5, pady=5
         )
 
+    def update(self):
+        self.presence_value.configure(
+            text="Present" if SENSORS[0].value else "Not Present"
+        )
+        self.humidity_value.configure(
+            text=SENSORS[5].value
+        )
+        self.soil_moisture_value.configure(
+            text=SENSORS[6].value
+        )
+        self.vaporizer_switch.update()
+        self.irrigator_switch.update()
+
 
 class AnimalsUI(TabUI):
     def __init__(self, tab: tk.Frame) -> None:
         super().__init__(tab)
 
     def _generateUI(self, tab: tk.Frame):
+        self.animal_informations = []
         sensors_pos = [7, 8, 9]
-        # TODO find a more elgant way
-        offset = 0
+        offset = 0  # TODO find a more elgant way
         for index, pos in enumerate(sensors_pos):
-            AnimalInformations(
+            animal_info = AnimalInformations(
                 self.tab,
                 SENSORS[pos],
                 SENSORS[pos + 3],
                 index + offset,
-                index
+                index  # TODO should be the name
             )
+            self.animal_informations.append(animal_info)
             offset = offset + 4
+
+    def update(self):
+        for animal_info in self.animal_informations:
+            animal_info.update()
