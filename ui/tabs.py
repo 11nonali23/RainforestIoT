@@ -161,10 +161,12 @@ class EnvironmentUI(TabUI):
             text="Present" if SENSORS[0].value else "Not Present"
         )
         self.humidity_value.configure(
-            text=SENSORS[5].value
+            text=SENSORS[5].value,
+            bg="red" if SENSORS[16].value else "#F0F0F0"
         )
         self.soil_moisture_value.configure(
-            text=SENSORS[6].value
+            text=SENSORS[6].value,
+            bg="red" if SENSORS[17].value else "#F0F0F0"
         )
         self.vaporizer_switch.update()
         self.irrigator_switch.update()

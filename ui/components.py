@@ -1,5 +1,6 @@
 from abc import ABC
 import tkinter as tk
+from sensors.available_sensors import SENSORS
 
 from sensors.sensor import Sensor
 
@@ -90,14 +91,16 @@ class AnimalInformations:
 
         self.heart_beat = tk.Label(
             self.tab,
-            text=f"heart beat: {self.health_sensor.value.get('hb')}"
+            text=f"heart beat: {self.health_sensor.value.get('hb')}",
+            bg="red" if SENSORS[13].value else "#F0F0F0"
         )
         self.heart_beat.grid(column=0, row=start_row + 1,
                              sticky=tk.W, padx=5, pady=5)
 
         self.body_temperature = tk.Label(
             self.tab,
-            text=f"body temperature: {self.health_sensor.value.get('body_tem')}"
+            text=f"body temperature: {self.health_sensor.value.get('body_tem')}",
+            bg="red" if SENSORS[14].value else "#F0F0F0"
         )
         self.body_temperature.grid(
             column=0, row=start_row + 2, sticky=tk.W, padx=5, pady=5
@@ -105,7 +108,8 @@ class AnimalInformations:
 
         self.location = tk.Label(
             self.tab,
-            text=f"location: {self.gps_sensor.value.get('lat')} lat - {self.gps_sensor.value.get('lon')} lon"
+            text=f"location: {self.gps_sensor.value.get('lat')} lat - {self.gps_sensor.value.get('lon')} lon",
+            bg="red" if SENSORS[15].value else "#F0F0F0"
         )
         self.location.grid(
             column=0, row=start_row + 3, sticky=tk.W, padx=5, pady=5
@@ -113,11 +117,14 @@ class AnimalInformations:
 
     def update(self):
         self.heart_beat.configure(
-            text=f"heart beat: {self.health_sensor.value.get('hb')}"
+            text=f"heart beat: {self.health_sensor.value.get('hb')}",
+            bg="red" if SENSORS[13].value else "#F0F0F0"
         )
         self.body_temperature.configure(
-            text=f"body temperature: {self.health_sensor.value.get('body_tem')}"
+            text=f"body temperature: {self.health_sensor.value.get('body_tem')}",
+            bg="red" if SENSORS[14].value else "#F0F0F0"
         )
         self.location.configure(
-            text=f"location: {self.gps_sensor.value.get('lat')} lat - {self.gps_sensor.value.get('lon')} lon"
+            text=f"location: {self.gps_sensor.value.get('lat')} lat - {self.gps_sensor.value.get('lon')} lon",
+            bg="red" if SENSORS[15].value else "#F0F0F0"
         )

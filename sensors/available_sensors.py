@@ -101,9 +101,18 @@ def randomize():
     for rule in RANDOMIZE_RULES:
         index = rule["index"]
         SENSORS[index].randomize(rule)
+
         # vaporizer on only if user is present or humidity is < 30
+        # humidty set alarm if value is < 30
         if index == 5:
             SENSORS[1].value = SENSORS[0].value == True or SENSORS[5].value < 30
+            SENSORS[16].value = SENSORS[5].value < 30
+
         # irrigators should be on only when soil moisture is < 30
+        # soil moisture set alarm if value is < 30
         if index == 6:
             SENSORS[3].value = SENSORS[6].value < 30
+            SENSORS[17].value = SENSORS[6].value < 30
+
+        # TODO set alarms also foor coordinates and birds health
+        # ...

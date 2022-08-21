@@ -28,8 +28,8 @@ class App(tk.Tk):
 
     def update(self):
         self._update_data()
-        self.after(2000, self.update)
-        self.after(5000, randomize)
+        self.after(2040, self.update)
+        self.after(8000, randomize)
 
     def _update_data(self):
         self.environmentUI.update()
