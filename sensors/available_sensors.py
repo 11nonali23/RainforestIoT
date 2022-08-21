@@ -1,3 +1,4 @@
+from operator import index
 from sensors.sensor import AnalogicalSensor, DigitalSensor, GPSSensor, HealthSensor, JSONSensor
 
 SENSORS = [
@@ -8,7 +9,7 @@ SENSORS = [
     DigitalSensor(_id="5", name="Irrigator Power", value=30),
 
     DigitalSensor(_id="6", name="Humidity", value=30),
-    DigitalSensor(_id="7", name="Soil Moisture", value=5),
+    DigitalSensor(_id="7", name="Soil Moisture", value=50),
 
     HealthSensor(_id="8", name="Bird1 Health",
                  value={"hb": 35, "body_tem": 35}),
@@ -98,4 +99,11 @@ def get_sensor(sensor_id):
 
 def randomize():
     for rule in RANDOMIZE_RULES:
-        SENSORS[rule["index"]].randomize(rule)
+        index = rule["index"]
+        SENSORS[index].randomize(rule)
+        # vaporizer on only if user is present or humidity is < 30
+        if index == 5:
+            SENSORS[1].value = SENSORS[0].value == True or SENSORS[5].value < 30
+        # irrigators should be on only when soil moisture is < 30
+        if index == 6:
+            SENSORS[3].value = SENSORS[6].value < 30
