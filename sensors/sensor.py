@@ -61,10 +61,10 @@ class HealthSensor(JSONSensor):
     def randomize(self, rule):
         hb_range = rule["hb"]
         body_tem_range = rule["body_tem"]
-        self.set_value({
-            "hb": randrange(hb_range[0], hb_range[1]),
-            "body_tem": randrange(body_tem_range[0], body_tem_range[1])
-        })
+        self.value["hb"] = randrange(hb_range[0], hb_range[1])
+        self.value["body_tem"] = randrange(
+            body_tem_range[0], body_tem_range[1]
+        )
 
 
 class GPSSensor(JSONSensor):
@@ -72,7 +72,5 @@ class GPSSensor(JSONSensor):
     def randomize(self, rule):
         lat_range = rule["lat"]
         lon_range = rule["lon"]
-        self.set_value({
-            "lat": randrange(lat_range[0], lat_range[1]),
-            "lon": randrange(lon_range[0], lon_range[1])
-        })
+        self.value["lat"] = randrange(lat_range[0], lat_range[1])
+        self.value["lon"] = randrange(lon_range[0], lon_range[1])

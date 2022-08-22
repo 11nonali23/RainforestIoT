@@ -12,15 +12,18 @@ SENSORS = [
     DigitalSensor(_id="7", name="Soil Moisture", value=50),
 
     HealthSensor(_id="8", name="Bird1 Health",
-                 value={"hb": 35, "body_tem": 35}),
+                 value={"hb": 35, "body_tem": 35, "name": "Bird1"}),
     HealthSensor(_id="9", name="Bird2 Health",
-                 value={"hb": 35, "body_tem": 35}),
+                 value={"hb": 35, "body_tem": 35, "name": "Bird2"}),
     HealthSensor(_id="10", name="Bird3 Healt",
-                 value={"hb": 35, "body_tem": 35}),
+                 value={"hb": 35, "body_tem": 35, "name": "Bird3"}),
 
-    GPSSensor(_id="11", name="Bird1 Coords", value={"lat": 45, "lon": 46}),
-    GPSSensor(_id="12", name="Bird2 Coords", value={"lat": 45, "lon": 46}),
-    GPSSensor(_id="13", name="Bird3 Coords", value={"lat": 45, "lon": 46}),
+    GPSSensor(_id="11", name="Bird1 Coords", value={
+              "lat": 45, "lon": 46, "name": "Bird1"}),
+    GPSSensor(_id="12", name="Bird2 Coords", value={
+              "lat": 45, "lon": 46, "name": "Bird2"}),
+    GPSSensor(_id="13", name="Bird3 Coords", value={
+              "lat": 45, "lon": 46, "name": "Bird3"}),
 
     AnalogicalSensor(_id="14", name="HearthBeat Alarm", value=False),
     AnalogicalSensor(_id="15", name="Body Temperature Alarm", value=False),
