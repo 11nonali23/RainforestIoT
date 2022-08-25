@@ -22,7 +22,6 @@ class TabUI(ABC):
         pass
 
 
-# TODO set the values from available sensors and all the callbacks
 class EnvironmentUI(TabUI):
     def __init__(self, tab: tk.Frame) -> None:
         super().__init__(tab)
@@ -180,14 +179,14 @@ class AnimalsUI(TabUI):
     def _generateUI(self, tab: tk.Frame):
         self.animal_informations = []
         sensors_pos = [7, 8, 9]
-        offset = 0  # TODO find a more elgant way
+        offset = 0
         for index, pos in enumerate(sensors_pos):
             animal_info = AnimalInformations(
                 self.tab,
                 SENSORS[pos],
                 SENSORS[pos + 3],
                 index + offset,
-                index  # TODO should be the name
+                index
             )
             self.animal_informations.append(animal_info)
             offset = offset + 4
