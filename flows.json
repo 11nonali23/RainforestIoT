@@ -1,0 +1,573 @@
+[
+    {
+        "id": "21cfc9c1db49869b",
+        "type": "tab",
+        "label": "MQTTReceivers",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a80e86f72a11bd80",
+        "type": "mqtt in",
+        "z": "21cfc9c1db49869b",
+        "name": "",
+        "topic": "errors/+",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "56bd97b68c9dd11f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 320,
+        "wires": [
+            [
+                "b845b35cab2eab70"
+            ]
+        ]
+    },
+    {
+        "id": "b845b35cab2eab70",
+        "type": "decrypt",
+        "z": "21cfc9c1db49869b",
+        "name": "DecryptError",
+        "algorithm": "AES",
+        "key": "labiotrainforest",
+        "x": 370,
+        "y": 320,
+        "wires": [
+            [
+                "9f9f3da8011e74ca"
+            ]
+        ]
+    },
+    {
+        "id": "fc43e633298aedaa",
+        "type": "mqtt in",
+        "z": "21cfc9c1db49869b",
+        "name": "",
+        "topic": "env/+",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "56bd97b68c9dd11f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 140,
+        "wires": [
+            [
+                "23a52473b7af779c"
+            ]
+        ]
+    },
+    {
+        "id": "23a52473b7af779c",
+        "type": "decrypt",
+        "z": "21cfc9c1db49869b",
+        "name": "DecryptValue",
+        "algorithm": "AES",
+        "key": "labiotrainforest",
+        "x": 370,
+        "y": 140,
+        "wires": [
+            [
+                "899a31772a454267"
+            ]
+        ]
+    },
+    {
+        "id": "e670b95a560d9685",
+        "type": "mqtt in",
+        "z": "21cfc9c1db49869b",
+        "name": "",
+        "topic": "birds/+",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "56bd97b68c9dd11f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 220,
+        "wires": [
+            [
+                "d48a7a2bc41e45f2"
+            ]
+        ]
+    },
+    {
+        "id": "d48a7a2bc41e45f2",
+        "type": "decrypt",
+        "z": "21cfc9c1db49869b",
+        "name": "DecryptValue",
+        "algorithm": "AES",
+        "key": "labiotrainforest",
+        "x": 370,
+        "y": 220,
+        "wires": [
+            [
+                "11c2c61eedde1a1d"
+            ]
+        ]
+    },
+    {
+        "id": "ed430e224729a8b9",
+        "type": "file",
+        "z": "21cfc9c1db49869b",
+        "name": "LogErrors",
+        "filename": "errors_log",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 780,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9f9f3da8011e74ca",
+        "type": "function",
+        "z": "21cfc9c1db49869b",
+        "name": "function 1",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 320,
+        "wires": [
+            [
+                "ed430e224729a8b9"
+            ]
+        ]
+    },
+    {
+        "id": "11c2c61eedde1a1d",
+        "type": "function",
+        "z": "21cfc9c1db49869b",
+        "name": "FormatValue",
+        "func": "let obj = JSON.parse(msg.payload);\nobj.timestamp = Date.now();\n\nmsg.collection = msg.topic.replace('/', '.'); \nmsg.payload = [obj]\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 220,
+        "wires": [
+            [
+                "203499054ea13edd"
+            ]
+        ]
+    },
+    {
+        "id": "203499054ea13edd",
+        "type": "mongodb4",
+        "z": "21cfc9c1db49869b",
+        "clientNode": "37e20789b639f60a",
+        "collection": "",
+        "operation": "insert",
+        "output": "toArray",
+        "name": "RainforestDB",
+        "x": 770,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "899a31772a454267",
+        "type": "function",
+        "z": "21cfc9c1db49869b",
+        "name": "FormatValue",
+        "func": "msg.collection = msg.topic.replace('/', '.');\nmsg.payload = [{\n    \"value\": msg.payload,\n    \"timestamp\": Date.now()\n}]\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 140,
+        "wires": [
+            [
+                "203499054ea13edd"
+            ]
+        ]
+    },
+    {
+        "id": "96ad96c3f123d5a8",
+        "type": "mqtt in",
+        "z": "21cfc9c1db49869b",
+        "name": "",
+        "topic": "env/humidity",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "56bd97b68c9dd11f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 460,
+        "wires": [
+            [
+                "2e0a2743fbaeaa56"
+            ]
+        ]
+    },
+    {
+        "id": "2e0a2743fbaeaa56",
+        "type": "decrypt",
+        "z": "21cfc9c1db49869b",
+        "name": "DecryptValue",
+        "algorithm": "AES",
+        "key": "labiotrainforest",
+        "x": 370,
+        "y": 460,
+        "wires": [
+            [
+                "932bf07fe8563251"
+            ]
+        ]
+    },
+    {
+        "id": "932bf07fe8563251",
+        "type": "ui_gauge",
+        "z": "21cfc9c1db49869b",
+        "name": "Humidity",
+        "group": "8f769c4a72a33cfe",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "90",
+        "max": "0",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "77",
+        "seg2": "57",
+        "className": "",
+        "x": 780,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "70dac23210c4447d",
+        "type": "mqtt in",
+        "z": "21cfc9c1db49869b",
+        "name": "",
+        "topic": "env/soilMoisture",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "56bd97b68c9dd11f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 540,
+        "wires": [
+            [
+                "c76bc0c791eb5f95"
+            ]
+        ]
+    },
+    {
+        "id": "c76bc0c791eb5f95",
+        "type": "decrypt",
+        "z": "21cfc9c1db49869b",
+        "name": "DecryptValue",
+        "algorithm": "AES",
+        "key": "labiotrainforest",
+        "x": 370,
+        "y": 540,
+        "wires": [
+            [
+                "862b3b949975e4a5"
+            ]
+        ]
+    },
+    {
+        "id": "862b3b949975e4a5",
+        "type": "ui_gauge",
+        "z": "21cfc9c1db49869b",
+        "name": "SoilMoisture",
+        "group": "8f769c4a72a33cfe",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "SoilMoisture",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "90",
+        "max": "0",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "77",
+        "seg2": "57",
+        "className": "",
+        "x": 790,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "81e87236b5cff86c",
+        "type": "mqtt in",
+        "z": "21cfc9c1db49869b",
+        "name": "",
+        "topic": "birds/health",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "56bd97b68c9dd11f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 640,
+        "wires": [
+            [
+                "50edac2682814e07"
+            ]
+        ]
+    },
+    {
+        "id": "50edac2682814e07",
+        "type": "decrypt",
+        "z": "21cfc9c1db49869b",
+        "name": "DecryptValue",
+        "algorithm": "AES",
+        "key": "labiotrainforest",
+        "x": 370,
+        "y": 640,
+        "wires": [
+            [
+                "5dfb5bbcc6e4c831",
+                "374e06f29df73d4c"
+            ]
+        ]
+    },
+    {
+        "id": "5dfb5bbcc6e4c831",
+        "type": "function",
+        "z": "21cfc9c1db49869b",
+        "name": "FormatValue",
+        "func": "let healthObj = JSON.parse(msg.payload);\n\nmsg.topic = healthObj.name;\nmsg.payload = healthObj.body_tem;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 660,
+        "wires": [
+            [
+                "1848df98f1e257a1"
+            ]
+        ]
+    },
+    {
+        "id": "374e06f29df73d4c",
+        "type": "function",
+        "z": "21cfc9c1db49869b",
+        "name": "FormatValue",
+        "func": "let healthObj = JSON.parse(msg.payload);\n\nmsg.topic = healthObj.name;\nmsg.payload = healthObj.hb;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 620,
+        "wires": [
+            [
+                "4a82ce96f134a587"
+            ]
+        ]
+    },
+    {
+        "id": "4a82ce96f134a587",
+        "type": "ui_chart",
+        "z": "21cfc9c1db49869b",
+        "name": "HeartRate",
+        "group": "27d22955fd10c06e",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "HeartRate",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 780,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1848df98f1e257a1",
+        "type": "ui_chart",
+        "z": "21cfc9c1db49869b",
+        "name": "BodyTemperature",
+        "group": "27d22955fd10c06e",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "BodyTemperature",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 810,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "56bd97b68c9dd11f",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "37e20789b639f60a",
+        "type": "mongodb4-client",
+        "name": "",
+        "protocol": "mongodb",
+        "hostname": "localhost",
+        "port": "27017",
+        "dbName": "Rainforest",
+        "authSource": "",
+        "authMechanism": "DEFAULT",
+        "tls": false,
+        "tlsCAFile": "",
+        "tlsInsecure": false,
+        "uri": "",
+        "advanced": "",
+        "uriTabActive": "tab-uri-simple"
+    },
+    {
+        "id": "8f769c4a72a33cfe",
+        "type": "ui_group",
+        "name": "Environment",
+        "tab": "0df9d6acb0e6adfe",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "27d22955fd10c06e",
+        "type": "ui_group",
+        "name": "Animals",
+        "tab": "0df9d6acb0e6adfe",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "0df9d6acb0e6adfe",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
