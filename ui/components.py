@@ -58,6 +58,60 @@ class OnOffSwtich:
             self.sensor.value = True
 
 
+class SensorRadioOption:
+
+    def __init__(self, tab, sensor: Sensor) -> None:
+        self.tab = tab
+        self.sensor = sensor
+        self.currentOption = tk.IntVar()
+        self.currentOption.set(3)
+        self._build()
+
+    def _build(self):
+        self.off = tk.Radiobutton(
+            self.tab,
+            text="Off",
+            variable=self.currentOption,
+            value=1,
+            command=self.handleSelection
+        )
+
+        self.on = tk.Radiobutton(
+            self.tab,
+            text="On",
+            variable=self.currentOption,
+            value=2,
+            command=self.handleSelection
+        )
+
+        self.auto = tk.Radiobutton(
+            self.tab,
+            text="Auto" if self.sensor.locked else f"Auto (now {self.sensor.value})",
+            variable=self.currentOption,
+            value=3,
+            command=self.handleSelection
+        )
+
+    def handleSelection(self):
+        choice = self.currentOption.get()
+
+        if choice == 1:
+            self.sensor.locked = False
+            self.sensor.set_value(False)
+            self.sensor.locked = True
+        elif choice == 2:
+            self.sensor.locked = False
+            self.sensor.set_value(True)
+            self.sensor.locked = True
+        elif choice == 3:
+            self.sensor.locked = False
+
+    def update(self):
+        self.auto.configure(
+            text="Auto" if self.sensor.locked else f"Auto (now {self.sensor.value})",
+        )
+
+
 # entry should then set the value
 class DigitalEntry:
 
