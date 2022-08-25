@@ -22,10 +22,10 @@ class Command:
     def _validate(self):
         self.valid = True
         if not self.action in AVAILABLE_ACTIONS:
-            self.error_message += "- invalid action "
+            self.error_message += f"- invalid action {self.action}"
             self.valid = False
         if not exists(self.sensor_id):
-            self.error_message += "- invalid sensor id"
+            self.error_message += f"- invalid sensor id {self.sensor_id}"
             self.valid = False
 
     # For now parsing is needed only on boolean values
