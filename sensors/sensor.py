@@ -2,18 +2,21 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 import json
 from random import randrange
+from unittest.mock import seal
 
 
 @dataclass
 class Sensor(ABC):
     _id: str
     name: str
+    locked = False
 
     def get_value_str(self) -> str:
         return str(self.value)
 
-    def set_value(self, value: bool) -> str:
-        # I have to do some validation
+    def set_value(self, value: object) -> str:
+        if self.locked:
+            return f"SET {self._id} failed, sensor is locked"
         self.value = value
         return f"SET {self._id} to {value} OK"
 
