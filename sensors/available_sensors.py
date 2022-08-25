@@ -8,15 +8,16 @@ SENSORS = [
     AnalogicalSensor(_id="4", name="Irrigators", value=False),
     DigitalSensor(_id="5", name="Irrigator Power", value=30),
 
-    DigitalSensor(_id="6", name="Humidity", value=30),
-    DigitalSensor(_id="7", name="Soil Moisture", value=50),
+    DigitalSensor(_id="6", name="Humidity", value=80),
+    DigitalSensor(_id="7", name="Soil Moisture", value=80),
 
+    # ibis, trumpeter, honeycreeper
     HealthSensor(_id="8", name="Bird1 Health",
-                 value={"hb": 35, "body_tem": 35, "name": "Bird1"}),
+                 value={"hb": 290, "body_tem": 40, "name": "Bird1"}),
     HealthSensor(_id="9", name="Bird2 Health",
-                 value={"hb": 35, "body_tem": 35, "name": "Bird2"}),
+                 value={"hb": 290, "body_tem": 40, "name": "Bird2"}),
     HealthSensor(_id="10", name="Bird3 Healt",
-                 value={"hb": 35, "body_tem": 35, "name": "Bird3"}),
+                 value={"hb": 290, "body_tem": 40, "name": "Bird3"}),
 
     GPSSensor(_id="11", name="Bird1 Coords", value={
               "lat": 45, "lon": 46, "name": "Bird1"}),
@@ -41,43 +42,43 @@ RANDOMIZE_RULES = [
 
     {
         "index": 5,
-        "range": (10, 90)
+        "range": (72, 93)
     },
     {
         "index": 6,
-        "range": (10, 90)
+        "range": (72, 93)
     },
 
     {
         "index": 7,
-        "hb": (10, 90),
-        "body_tem": (10, 90)
+        "hb": (280, 310),
+        "body_tem": (37, 45)
     },
     {
         "index": 8,
-        "hb": (10, 90),
-        "body_tem": (10, 90)
+        "hb": (280, 310),
+        "body_tem": (37, 45)
     },
     {
         "index": 9,
-        "hb": (10, 90),
-        "body_tem": (10, 90)
+        "hb": (280, 310),
+        "body_tem": (37, 45)
     },
 
     {
         "index": 10,
-        "lat": (10, 90),
-        "lon": (10, 90)
+        "lat": (40, 50),
+        "lon": (40, 50)
     },
     {
         "index": 11,
-        "lat": (10, 90),
-        "lon": (10, 90)
+        "lat": (40, 50),
+        "lon": (40, 50)
     },
     {
         "index": 12,
-        "lat": (10, 90),
-        "lon": (10, 90)
+        "lat": (40, 50),
+        "lon": (40, 50)
     }
 ]
 
@@ -104,18 +105,3 @@ def randomize():
     for rule in RANDOMIZE_RULES:
         index = rule["index"]
         SENSORS[index].randomize(rule)
-
-        # vaporizer on only if user is present or humidity is < 30
-        # humidty set alarm if value is < 30
-        if index == 5:
-            SENSORS[1].value = SENSORS[0].value == True or SENSORS[5].value < 30
-            SENSORS[16].value = SENSORS[5].value < 30
-
-        # irrigators should be on only when soil moisture is < 30
-        # soil moisture set alarm if value is < 30
-        if index == 6:
-            SENSORS[3].value = SENSORS[6].value < 30
-            SENSORS[17].value = SENSORS[6].value < 30
-
-        # TODO set alarms also foor coordinates and birds health
-        # ...
