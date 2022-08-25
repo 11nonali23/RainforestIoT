@@ -79,12 +79,13 @@ class AnimalInformations:
         self.tab = tab
         self.health_sensor = health_sensor
         self.gps_sensor = gps_sensor
-        self._build(start_row, bird_num)
+        self.bird_num = bird_num
+        self._build(start_row)
 
-    def _build(self, start_row, bird_num):
+    def _build(self, start_row):
         self.title = Title(
             self.tab,
-            text=f"Bird{bird_num} Informations"
+            text=f"Bird{self.bird_num + 1} Informations"
         )
         self.title.label.grid(column=0, row=start_row,
                               sticky=tk.W, padx=5, pady=5)
@@ -115,13 +116,13 @@ class AnimalInformations:
     def update(self):
         self.heart_beat.configure(
             text=f"heart beat: {self.health_sensor.value.get('hb')}",
-            bg="red" if SENSORS[13].value else "#F0F0F0"
+            bg="red" if SENSORS[15 + self.bird_num].value else "#F0F0F0"
         )
         self.body_temperature.configure(
             text=f"body temperature: {self.health_sensor.value.get('body_tem')}",
-            bg="red" if SENSORS[14].value else "#F0F0F0"
+            bg="red" if SENSORS[18 + self.bird_num].value else "#F0F0F0"
         )
         self.location.configure(
             text=f"location: {self.gps_sensor.value.get('lat')} lat - {self.gps_sensor.value.get('lon')} lon",
-            bg="red" if SENSORS[15].value else "#F0F0F0"
+            bg="red" if SENSORS[21 + self.bird_num].value else "#F0F0F0"
         )

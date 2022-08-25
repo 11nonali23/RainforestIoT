@@ -26,11 +26,17 @@ SENSORS = [
     GPSSensor(_id="13", name="Bird3 Coords", value={
               "lat": 45, "lon": 46, "name": "Bird3"}),
 
-    AnalogicalSensor(_id="14", name="HearthBeat Alarm", value=False),
-    AnalogicalSensor(_id="15", name="Body Temperature Alarm", value=False),
-    AnalogicalSensor(_id="16", name="Boundaries Alarm", value=False),
-    AnalogicalSensor(_id="17", name="Humidity Alarm", value=False),
-    AnalogicalSensor(_id="18", name="Soil Moisture Alarm", value=False),
+    AnalogicalSensor(_id="14", name="Humidity Alarm", value=False),
+    AnalogicalSensor(_id="15", name="Soil Moisture Alarm", value=False),
+    AnalogicalSensor(_id="16", name="Bird1 HearthBeat Alarm", value=False),
+    AnalogicalSensor(_id="17", name="Bird2 HearthBeat Alarm", value=False),
+    AnalogicalSensor(_id="18", name="Bird3 HearthBeat Alarm", value=False),
+    AnalogicalSensor(_id="19", name="Bird1 Temperature Alarm", value=False),
+    AnalogicalSensor(_id="20", name="Bird2 Temperature Alarm", value=False),
+    AnalogicalSensor(_id="21", name="Bird3 Temperature Alarm", value=False),
+    AnalogicalSensor(_id="22", name="Bird1 Boundaries Alarm", value=False),
+    AnalogicalSensor(_id="23", name="Bird2 Boundaries Alarm", value=False),
+    AnalogicalSensor(_id="24", name="Bird3 Boundaries Alarm", value=False),
 ]
 
 
