@@ -27,10 +27,13 @@ class App(tk.Tk):
         self.animalsUI = AnimalsUI(self.tab_animals)
 
     def update(self):
-        self._update_data()
-        self.after(2040, self.update)
-        self.after(8000, randomize)
+        self._update_ui()
+        self.after(1000, self.update)
 
-    def _update_data(self):
+    def randomize(self):
+        randomize()
+        self.after(10000, self.randomize)
+
+    def _update_ui(self):
         self.environmentUI.update()
         self.animalsUI.update()

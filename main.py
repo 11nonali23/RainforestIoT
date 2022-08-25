@@ -7,5 +7,6 @@ if __name__ == "__main__":
     server.start()
 
     app = App()
+    app.randomize()
     app.update()
     app.mainloop()
