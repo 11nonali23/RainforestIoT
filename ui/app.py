@@ -12,7 +12,7 @@ class App(tk.Tk):
 
         self.window = tk.Toplevel()
         self.window.title("Rainforest Application")
-        self.window.geometry("1300x700")
+        self.window.geometry("800x500")
 
         self.tabControl = ttk.Notebook(self.window)
         self.tab_environment = tk.Frame(self.tabControl)
