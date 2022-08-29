@@ -18,7 +18,7 @@ class App(tk.Tk):
         self.tab_environment = tk.Frame(self.tabControl)
         self.tabControl.add(self.tab_environment, text='Environment')
         self.tab_animals = tk.Frame(self.tabControl)
-        self.tabControl.add(self.tab_animals, text='Animals')
+        self.tabControl.add(self.tab_animals, text='Birds')
         self.tabControl.pack(expand=1, fill="both")
 
         # I should use dependency injection
