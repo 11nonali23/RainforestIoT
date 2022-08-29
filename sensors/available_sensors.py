@@ -12,18 +12,18 @@ SENSORS = [
     DigitalSensor(_id="7", name="Soil Moisture", value=80),
 
     # ibis, trumpeter, honeycreeper
-    HealthSensor(_id="8", name="Bird1 Health",
+    HealthSensor(_id="8", name="Bird1",
                  value={"hb": 290, "body_tem": 40, "name": "Bird1"}),
-    HealthSensor(_id="9", name="Bird2 Health",
+    HealthSensor(_id="9", name="Bird2",
                  value={"hb": 290, "body_tem": 40, "name": "Bird2"}),
-    HealthSensor(_id="10", name="Bird3 Healt",
+    HealthSensor(_id="10", name="Bird3",
                  value={"hb": 290, "body_tem": 40, "name": "Bird3"}),
 
-    GPSSensor(_id="11", name="Bird1 Coords", value={
+    GPSSensor(_id="11", name="Bird1", value={
               "lat": 45, "lon": 46, "name": "Bird1"}),
-    GPSSensor(_id="12", name="Bird2 Coords", value={
+    GPSSensor(_id="12", name="Bird2", value={
               "lat": 45, "lon": 46, "name": "Bird2"}),
-    GPSSensor(_id="13", name="Bird3 Coords", value={
+    GPSSensor(_id="13", name="Bird3", value={
               "lat": 45, "lon": 46, "name": "Bird3"}),
 
     AnalogicalSensor(_id="14", name="Humidity Alarm", value=False),
