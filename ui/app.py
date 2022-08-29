@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from logging import root
 import tkinter as tk
 from tkinter import ttk
 
@@ -10,19 +11,17 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        self.window = tk.Toplevel()
-        self.window.title("Rainforest Application")
-        self.window.geometry("800x500")
+        self.title("Rainforest Application")
+        self.geometry("800x500")
 
-        self.tabControl = ttk.Notebook(self.window)
+        self.tabControl = ttk.Notebook(self)
         self.tab_environment = tk.Frame(self.tabControl)
         self.tabControl.add(self.tab_environment, text='Environment')
         self.tab_animals = tk.Frame(self.tabControl)
         self.tabControl.add(self.tab_animals, text='Animals')
         self.tabControl.pack(expand=1, fill="both")
 
-        # Set other parts of UI in another class/method
-        # I should use dependency injection......
+        # I should use dependency injection
         self.environmentUI = EnvironmentUI(self.tab_environment)
         self.animalsUI = AnimalsUI(self.tab_animals)
 
