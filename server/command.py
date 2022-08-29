@@ -5,7 +5,7 @@ AVAILABLE_ACTIONS = ["GET", "SET"]
 
 
 class Command:
-    def __init__(self, data: str, sensors):
+    def __init__(self, data: str):
         self.error_message = "ERRORS: "
         self._parse(data)
         self._validate()
@@ -17,7 +17,7 @@ class Command:
         try:
             self.value = self._parse_value(data[2])
         except IndexError:
-            self.value = False
+            self.value = None
 
     def _validate(self):
         self.valid = True
@@ -35,4 +35,4 @@ class Command:
         return False
 
     def __str__(self) -> str:
-        return f"Command({self.action}, {self.sensor_id})"
+        return f"Command({self.action})"

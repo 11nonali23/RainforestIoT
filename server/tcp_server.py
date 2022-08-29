@@ -65,7 +65,7 @@ class Server(threading.Thread):
 
     def _handle_connection(self, data, data_outb):
         data = data.decode('utf8')
-        command = Command(data, SENSORS)
+        command = Command(data)
 
         if not command.valid:
             data_outb += str.encode(command.error_message)
