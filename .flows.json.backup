@@ -136,6 +136,23 @@
         "sessionExpiry": ""
     },
     {
+        "id": "46945841e756c922",
+        "type": "mongodb4-client",
+        "name": "",
+        "protocol": "mongodb",
+        "hostname": "localhost",
+        "port": "27017",
+        "dbName": "Rainforest",
+        "authSource": "",
+        "authMechanism": "DEFAULT",
+        "tls": false,
+        "tlsCAFile": "",
+        "tlsInsecure": false,
+        "uri": "",
+        "advanced": "",
+        "uriTabActive": "tab-uri-simple"
+    },
+    {
         "id": "37e20789b639f60a",
         "type": "mongodb4-client",
         "name": "",
