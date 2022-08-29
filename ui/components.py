@@ -171,15 +171,15 @@ class AnimalInformations:
         self.heart_beat.configure(
             text=f"heart beat: {self.health_sensor.value.get('hb')}",
             bg="red" if SENSORS[15 +
-                                self.bird_num].value else "SystemButtonFace"
+                                self.bird_num].value else "#ECECEC"
         )
         self.body_temperature.configure(
             text=f"body temperature: {self.health_sensor.value.get('body_tem')}",
             bg="red" if SENSORS[18 +
-                                self.bird_num].value else "SystemButtonFace"
+                                self.bird_num].value else "#ECECEC"
         )
         self.location.configure(
             text=f"location: {self.gps_sensor.value.get('lat')} lat - {self.gps_sensor.value.get('lon')} lon",
             bg="red" if SENSORS[21 +
-                                self.bird_num].value else "SystemButtonFace"
+                                self.bird_num].value else "#ECECEC"
         )

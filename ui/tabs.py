@@ -162,11 +162,11 @@ class EnvironmentUI(TabUI):
         )
         self.humidity_value.configure(
             text=SENSORS[5].value,
-            bg="red" if SENSORS[13].value else "SystemButtonFace"
+            bg="red" if SENSORS[13].value else "#ECECEC"
         )
         self.soil_moisture_value.configure(
             text=SENSORS[6].value,
-            bg="red" if SENSORS[14].value else "SystemButtonFace"
+            bg="red" if SENSORS[14].value else "#ECECEC"
         )
         self.vaporizer_radio.update()
         self.irrigator_radio.update()
