@@ -34,7 +34,7 @@
     {
         "id": "21cfc9c1db49869b",
         "type": "tab",
-        "label": "MQTTReceivers",
+        "label": "MQTTSubscribers",
         "disabled": false,
         "info": "",
         "env": []
@@ -358,7 +358,7 @@
         "id": "55c33452fc63bdcc",
         "type": "tcp request",
         "z": "f97095c1612c0231",
-        "name": "GETRequest",
+        "name": "SETRequest",
         "server": "127.0.0.1",
         "port": "9000",
         "out": "char",
@@ -406,7 +406,7 @@
         "id": "74c1d8911d915859",
         "type": "function",
         "z": "f87284aad6864f17",
-        "name": "UserPresence",
+        "name": "UserPresenceId",
         "func": "msg.queryId = \"1\"\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
@@ -457,14 +457,14 @@
         "id": "23e92501053af997",
         "type": "function",
         "z": "f87284aad6864f17",
-        "name": "Humidity",
+        "name": "HumidityId",
         "func": "msg.queryId = \"6\"\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 440,
+        "x": 450,
         "y": 160,
         "wires": [
             [
@@ -568,22 +568,6 @@
                 "6c35f8f892ecde7e"
             ]
         ]
-    },
-    {
-        "id": "734fdb6af71bc752",
-        "type": "debug",
-        "z": "f87284aad6864f17",
-        "name": "debug 12",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 880,
-        "y": 440,
-        "wires": []
     },
     {
         "id": "40d4c6a48f7dcf01",
@@ -785,16 +769,34 @@
         "id": "55e95c1db5ae9e5e",
         "type": "debug",
         "z": "f87284aad6864f17",
-        "name": "debug 15",
+        "name": "PrintResult",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 880,
+        "x": 890,
         "y": 500,
+        "wires": []
+    },
+    {
+        "id": "734fdb6af71bc752",
+        "type": "debug",
+        "z": "f87284aad6864f17",
+        "name": "PrintResult",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 440,
         "wires": []
     },
     {
@@ -830,7 +832,7 @@
         "id": "92f808e210578dc8",
         "type": "function",
         "z": "c006e20c144742db",
-        "name": "SetSensor",
+        "name": "SetSensorId",
         "func": "msg.queryId = \"7\"\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
@@ -944,22 +946,6 @@
         ]
     },
     {
-        "id": "7ce2e767e33002bf",
-        "type": "debug",
-        "z": "c006e20c144742db",
-        "name": "debug 6",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 780,
-        "y": 340,
-        "wires": []
-    },
-    {
         "id": "13ae57bde0d8c638",
         "type": "encrypt",
         "z": "c006e20c144742db",
@@ -1025,38 +1011,6 @@
         ]
     },
     {
-        "id": "063b1c368e935b02",
-        "type": "debug",
-        "z": "c006e20c144742db",
-        "name": "debug 7",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 780,
-        "y": 400,
-        "wires": []
-    },
-    {
-        "id": "fb9bb2095b62980c",
-        "type": "debug",
-        "z": "c006e20c144742db",
-        "name": "debug 8",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 760,
-        "y": 80,
-        "wires": []
-    },
-    {
         "id": "ef6b878e7733483e",
         "type": "subflow:457e8c05c9785e19",
         "z": "c006e20c144742db",
@@ -1065,10 +1019,43 @@
         "y": 80,
         "wires": [
             [
-                "fb9bb2095b62980c",
                 "2b0f5ba124bad7ad"
             ]
         ]
+    },
+    {
+        "id": "063b1c368e935b02",
+        "type": "debug",
+        "z": "c006e20c144742db",
+        "name": "PrintResult",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "7ce2e767e33002bf",
+        "type": "debug",
+        "z": "c006e20c144742db",
+        "name": "PrintResult",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 340,
+        "wires": []
     },
     {
         "id": "f5ef54eea0985e4a",
@@ -1103,7 +1090,7 @@
         "id": "9361d216d18a96ff",
         "type": "loop",
         "z": "a9d611e430e24fc7",
-        "name": "FixedLoop",
+        "name": "SensorsLoop",
         "kind": "fcnt",
         "count": "3",
         "initial": "8",
@@ -1116,7 +1103,7 @@
         "limit": "",
         "loopPayload": "loop-orig",
         "finalPayload": "final-orig",
-        "x": 470,
+        "x": 350,
         "y": 80,
         "wires": [
             [],
@@ -1129,7 +1116,7 @@
         "id": "88fc28322ca1baac",
         "type": "function",
         "z": "a9d611e430e24fc7",
-        "name": "GetSensorIndex",
+        "name": "SetSensorIndex",
         "func": "msg.queryId = msg.loop.value;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
@@ -1149,7 +1136,7 @@
         "type": "subflow:457e8c05c9785e19",
         "z": "a9d611e430e24fc7",
         "name": "",
-        "x": 560,
+        "x": 570,
         "y": 160,
         "wires": [
             [
@@ -1260,15 +1247,16 @@
         "id": "c6ef15cdb22919e1",
         "type": "debug",
         "z": "a9d611e430e24fc7",
-        "name": "debug 9",
+        "name": "PrintResult",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 780,
+        "x": 790,
         "y": 420,
         "wires": []
     },
@@ -1308,15 +1296,16 @@
         "id": "6b51107fd23a352b",
         "type": "debug",
         "z": "a9d611e430e24fc7",
-        "name": "debug 10",
+        "name": "PrintResult",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 780,
+        "x": 790,
         "y": 480,
         "wires": []
     },
@@ -1386,7 +1375,7 @@
         "id": "308567613d6b936f",
         "type": "loop",
         "z": "1f6ef931d2586798",
-        "name": "FixedLoop",
+        "name": "SensorsLoop",
         "kind": "fcnt",
         "count": "3",
         "initial": "11",
@@ -1399,7 +1388,7 @@
         "limit": "",
         "loopPayload": "loop-orig",
         "finalPayload": "final-orig",
-        "x": 470,
+        "x": 350,
         "y": 80,
         "wires": [
             [],
@@ -1412,7 +1401,7 @@
         "id": "cb2372a2101be6c6",
         "type": "function",
         "z": "1f6ef931d2586798",
-        "name": "GetSensorIndex",
+        "name": "SetSensorIndex",
         "func": "msg.queryId = msg.loop.value;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
@@ -1502,7 +1491,7 @@
         "correl": "",
         "expiry": "",
         "broker": "56bd97b68c9dd11f",
-        "x": 780,
+        "x": 800,
         "y": 260,
         "wires": []
     },
@@ -1542,15 +1531,16 @@
         "id": "fba59e0a6cb8f02e",
         "type": "debug",
         "z": "1f6ef931d2586798",
-        "name": "debug 11",
+        "name": "PrintResult",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 800,
+        "x": 790,
         "y": 420,
         "wires": []
     },
@@ -1583,7 +1573,7 @@
         "correl": "",
         "expiry": "",
         "broker": "56bd97b68c9dd11f",
-        "x": 770,
+        "x": 790,
         "y": 360,
         "wires": []
     },
@@ -1600,8 +1590,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 130,
-        "y": 320,
+        "x": 110,
+        "y": 260,
         "wires": [
             [
                 "b845b35cab2eab70"
@@ -1615,11 +1605,11 @@
         "name": "DecryptError",
         "algorithm": "AES",
         "key": "labiotrainforest",
-        "x": 370,
-        "y": 320,
+        "x": 350,
+        "y": 260,
         "wires": [
             [
-                "9f9f3da8011e74ca"
+                "ed430e224729a8b9"
             ]
         ]
     },
@@ -1636,8 +1626,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 130,
-        "y": 140,
+        "x": 110,
+        "y": 60,
         "wires": [
             [
                 "23a52473b7af779c"
@@ -1651,8 +1641,8 @@
         "name": "DecryptValue",
         "algorithm": "AES",
         "key": "labiotrainforest",
-        "x": 370,
-        "y": 140,
+        "x": 350,
+        "y": 60,
         "wires": [
             [
                 "899a31772a454267"
@@ -1672,8 +1662,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 130,
-        "y": 220,
+        "x": 110,
+        "y": 140,
         "wires": [
             [
                 "d48a7a2bc41e45f2"
@@ -1687,8 +1677,8 @@
         "name": "DecryptValue",
         "algorithm": "AES",
         "key": "labiotrainforest",
-        "x": 370,
-        "y": 220,
+        "x": 350,
+        "y": 140,
         "wires": [
             [
                 "11c2c61eedde1a1d"
@@ -1706,29 +1696,10 @@
         "createDir": false,
         "overwriteFile": "false",
         "encoding": "none",
-        "x": 780,
-        "y": 320,
+        "x": 760,
+        "y": 260,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "9f9f3da8011e74ca",
-        "type": "function",
-        "z": "21cfc9c1db49869b",
-        "name": "function 1",
-        "func": "\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 560,
-        "y": 320,
-        "wires": [
-            [
-                "ed430e224729a8b9"
-            ]
         ]
     },
     {
@@ -1736,14 +1707,14 @@
         "type": "function",
         "z": "21cfc9c1db49869b",
         "name": "FormatValue",
-        "func": "let obj = JSON.parse(msg.payload);\nobj.timestamp = Date.now();\n\nmsg.collection = msg.topic.replace('/', '.'); \nmsg.payload = [obj]\n\nreturn msg;",
+        "func": "let obj = JSON.parse(msg.payload);\nobj.date = new Date();\n\nmsg.collection = msg.topic.replace('/', '.'); \nmsg.payload = [obj]\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 590,
-        "y": 220,
+        "x": 550,
+        "y": 140,
         "wires": [
             [
                 "203499054ea13edd"
@@ -1759,8 +1730,8 @@
         "operation": "insert",
         "output": "toArray",
         "name": "RainforestDB",
-        "x": 790,
-        "y": 180,
+        "x": 770,
+        "y": 100,
         "wires": [
             []
         ]
@@ -1770,14 +1741,14 @@
         "type": "function",
         "z": "21cfc9c1db49869b",
         "name": "FormatValue",
-        "func": "msg.collection = msg.topic.replace('/', '.');\nmsg.payload = [{\n    \"value\": msg.payload,\n    \"timestamp\": Date.now()\n}]\n\nreturn msg;",
+        "func": "msg.collection = msg.topic.replace('/', '.');\nmsg.payload = [{\n    \"value\": msg.payload,\n    \"date\": new Date()\n}]\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 570,
-        "y": 140,
+        "x": 550,
+        "y": 60,
         "wires": [
             [
                 "203499054ea13edd"
@@ -1797,8 +1768,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 150,
-        "y": 460,
+        "x": 130,
+        "y": 380,
         "wires": [
             [
                 "2e0a2743fbaeaa56"
@@ -1812,8 +1783,8 @@
         "name": "DecryptValue",
         "algorithm": "AES",
         "key": "labiotrainforest",
-        "x": 370,
-        "y": 460,
+        "x": 350,
+        "y": 380,
         "wires": [
             [
                 "932bf07fe8563251"
@@ -1843,8 +1814,8 @@
         "seg1": "77",
         "seg2": "57",
         "className": "",
-        "x": 780,
-        "y": 460,
+        "x": 760,
+        "y": 380,
         "wires": []
     },
     {
@@ -1860,8 +1831,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 160,
-        "y": 540,
+        "x": 140,
+        "y": 460,
         "wires": [
             [
                 "c76bc0c791eb5f95"
@@ -1875,8 +1846,8 @@
         "name": "DecryptValue",
         "algorithm": "AES",
         "key": "labiotrainforest",
-        "x": 370,
-        "y": 540,
+        "x": 350,
+        "y": 460,
         "wires": [
             [
                 "862b3b949975e4a5"
@@ -1906,8 +1877,8 @@
         "seg1": "77",
         "seg2": "57",
         "className": "",
-        "x": 790,
-        "y": 540,
+        "x": 770,
+        "y": 460,
         "wires": []
     },
     {
@@ -1923,8 +1894,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 150,
-        "y": 640,
+        "x": 130,
+        "y": 560,
         "wires": [
             [
                 "50edac2682814e07"
@@ -1938,8 +1909,8 @@
         "name": "DecryptValue",
         "algorithm": "AES",
         "key": "labiotrainforest",
-        "x": 370,
-        "y": 640,
+        "x": 350,
+        "y": 560,
         "wires": [
             [
                 "5dfb5bbcc6e4c831",
@@ -1958,8 +1929,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 570,
-        "y": 660,
+        "x": 550,
+        "y": 580,
         "wires": [
             [
                 "1848df98f1e257a1"
@@ -1977,8 +1948,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 570,
-        "y": 620,
+        "x": 550,
+        "y": 540,
         "wires": [
             [
                 "4a82ce96f134a587"
@@ -2023,8 +1994,8 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 780,
-        "y": 620,
+        "x": 760,
+        "y": 540,
         "wires": [
             []
         ]
@@ -2067,8 +2038,8 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 810,
-        "y": 660,
+        "x": 790,
+        "y": 580,
         "wires": [
             []
         ]
