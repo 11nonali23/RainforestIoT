@@ -16,7 +16,7 @@ class Sensor(ABC):
 
     def set_value(self, value: object) -> str:
         if self.locked:
-            return f"SET {self._id} failed, sensor is locked"
+            return f"ERRORS: SET {self._id} failed, sensor is locked"
         self.value = value
         return f"SET {self._id} to {value} OK"
 
@@ -25,7 +25,7 @@ class Sensor(ABC):
             return self.get_value_str()
         if command.action == "SET":
             return self.set_value(command.value)
-        return "ERROR - invalid message"
+        return "ERRORS: invalid message"
 
     @abstractmethod
     def randomize(self, rule):
