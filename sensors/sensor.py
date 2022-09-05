@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 import json
 from random import randrange
-from unittest.mock import seal
 
 
 @dataclass

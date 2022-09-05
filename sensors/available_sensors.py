@@ -1,5 +1,4 @@
-from operator import index
-from sensors.sensor import AnalogicalSensor, DigitalSensor, GPSSensor, HealthSensor, JSONSensor
+from sensors.sensor import AnalogicalSensor, DigitalSensor, GPSSensor, HealthSensor
 
 SENSORS = [
     AnalogicalSensor(_id="1", name="User Presence", value=True),

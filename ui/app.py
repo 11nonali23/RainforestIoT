@@ -1,9 +1,7 @@
-from abc import ABC, abstractmethod
-from logging import root
 import tkinter as tk
 from tkinter import ttk
 
-from sensors.available_sensors import SENSORS, randomize
+from sensors.available_sensors import randomize
 from ui.tabs import AnimalsUI, EnvironmentUI
 
 
