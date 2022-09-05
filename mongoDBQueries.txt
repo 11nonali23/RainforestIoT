@@ -1,0 +1,74 @@
+//count how many users passed under the water vaporizer on a time frame
+db.env.userPresence.find({
+    "date" : {
+        "$gte": new Date("2022-09-01T00:00:00.000Z"),
+        "$lt": new Date("2022-09-02T00:00:00.000Z")
+    }
+}).count()
+
+//get the avg humidity/soil moisture on a time frame
+db.env.humidity.aggregate([
+    {
+        $match: {
+            "date" : {
+                "$gte": new Date("2022-09-01T00:00:00.000Z"),
+                "$lt": new Date("2022-09-02T00:00:00.000Z")
+            }
+        }
+    },
+    {
+        $group: { _id: null, avg: { $avg: "$value" } }
+    }
+])
+
+//get the avg heart rate and body temperature for each bird type on a time frame
+db.birds.health.aggregate([
+    {
+        $match: {
+            "date" : {
+                "$gte": new Date("2022-09-01T00:00:00.000Z"),
+                "$lt": new Date("2022-09-02T00:00:00.000Z")
+            }
+        }
+    },
+    {
+        $group: { _id: "$name", avg: { $avg: "$hb" } }
+    }
+])
+
+//get birds that had health problems on a specific day or in general
+db.birds.health.find({
+    $or: [
+        {
+            hb: {
+                $lt: 285,
+                $gt: 305
+            }
+        },
+        {
+            body_tem: {
+                $lt: 39,
+                $gt: 45
+            }
+        }
+    ]
+})
+
+//get birds that are out of boundaries
+db.birds.coords.find({
+    $or: [
+        {
+            lat: {
+                $lt: 40,
+                $gt: 50
+
+            }
+        },
+        {
+            lon: {
+                $lt: 40,
+                $gt: 50
+            }
+        }
+    ]
+})
