@@ -9,7 +9,7 @@ from server.command import Command
 sel = selectors.DefaultSelector()
 
 
-class Server(threading.Thread):
+class TCPServer(threading.Thread):
     HOST, PORT = "127.0.0.1", 9000
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -81,5 +81,5 @@ class Server(threading.Thread):
 
 
 if __name__ == "__main__":
-    s = Server()
+    s = TCPServer()
     s.start()

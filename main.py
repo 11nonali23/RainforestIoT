@@ -1,9 +1,9 @@
-from server.tcp_server import Server
+from server.tcp_server import TCPServer
 from ui.app import App
 
 
 if __name__ == "__main__":
-    server = Server()
+    server = TCPServer()
     server.start()
 
     app = App()
