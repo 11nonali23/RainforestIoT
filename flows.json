@@ -40,6 +40,14 @@
         "env": []
     },
     {
+        "id": "fd35b625aa6945db",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "457e8c05c9785e19",
         "type": "subflow",
         "name": "TCPQuery",
@@ -454,57 +462,6 @@
         ]
     },
     {
-        "id": "23e92501053af997",
-        "type": "function",
-        "z": "f87284aad6864f17",
-        "name": "HumidityId",
-        "func": "msg.queryId = \"6\"\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 450,
-        "y": 160,
-        "wires": [
-            [
-                "96662c9de4afc632"
-            ]
-        ]
-    },
-    {
-        "id": "96662c9de4afc632",
-        "type": "subflow:457e8c05c9785e19",
-        "z": "f87284aad6864f17",
-        "name": "",
-        "x": 670,
-        "y": 160,
-        "wires": [
-            [
-                "2eb2c42567e1c30c"
-            ]
-        ]
-    },
-    {
-        "id": "2eb2c42567e1c30c",
-        "type": "function",
-        "z": "f87284aad6864f17",
-        "name": "SetValue",
-        "func": "msg.humidity = msg.payload;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 880,
-        "y": 160,
-        "wires": [
-            [
-                "3824d2b834f267ad"
-            ]
-        ]
-    },
-    {
         "id": "c06297d23b1e14bd",
         "type": "encrypt",
         "z": "f87284aad6864f17",
@@ -576,7 +533,7 @@
         "name": "EncryptValue",
         "algorithm": "AES",
         "key": "labiotrainforest",
-        "x": 450,
+        "x": 670,
         "y": 640,
         "wires": [
             [
@@ -609,7 +566,7 @@
         "name": "EncryptValue",
         "algorithm": "AES",
         "key": "labiotrainforest",
-        "x": 450,
+        "x": 670,
         "y": 580,
         "wires": [
             [
@@ -728,8 +685,8 @@
             [
                 "9d7275d3173bfdfb",
                 "a057f43ce8e4ca7c",
-                "6710d02f104b8dad",
-                "40d4c6a48f7dcf01"
+                "63b628b14ade0d3a",
+                "487a236225f2cbd8"
             ]
         ]
     },
@@ -800,6 +757,95 @@
         "wires": []
     },
     {
+        "id": "23e92501053af997",
+        "type": "function",
+        "z": "f87284aad6864f17",
+        "name": "HumidityId",
+        "func": "msg.queryId = \"6\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 160,
+        "wires": [
+            [
+                "96662c9de4afc632"
+            ]
+        ]
+    },
+    {
+        "id": "96662c9de4afc632",
+        "type": "subflow:457e8c05c9785e19",
+        "z": "f87284aad6864f17",
+        "name": "",
+        "x": 670,
+        "y": 160,
+        "wires": [
+            [
+                "2eb2c42567e1c30c"
+            ]
+        ]
+    },
+    {
+        "id": "2eb2c42567e1c30c",
+        "type": "function",
+        "z": "f87284aad6864f17",
+        "name": "SetValue",
+        "func": "msg.humidity = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 160,
+        "wires": [
+            [
+                "3824d2b834f267ad"
+            ]
+        ]
+    },
+    {
+        "id": "63b628b14ade0d3a",
+        "type": "function",
+        "z": "f87284aad6864f17",
+        "name": "SetValue",
+        "func": "msg.payload = msg.userPresence;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 580,
+        "wires": [
+            [
+                "6710d02f104b8dad"
+            ]
+        ]
+    },
+    {
+        "id": "487a236225f2cbd8",
+        "type": "function",
+        "z": "f87284aad6864f17",
+        "name": "SetValue",
+        "func": "msg.payload = msg.humidity;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 640,
+        "wires": [
+            [
+                "40d4c6a48f7dcf01"
+            ]
+        ]
+    },
+    {
         "id": "534be8a0a43726c4",
         "type": "inject",
         "z": "c006e20c144742db",
@@ -816,7 +862,7 @@
         "repeat": "",
         "crontab": "",
         "once": false,
-        "onceDelay": 0.1,
+        "onceDelay": "0.5",
         "topic": "",
         "payload": "",
         "payloadType": "date",
@@ -1741,7 +1787,7 @@
         "type": "function",
         "z": "21cfc9c1db49869b",
         "name": "FormatValue",
-        "func": "msg.collection = msg.topic.replace('/', '.');\nmsg.payload = [{\n    \"value\": msg.payload,\n    \"date\": new Date()\n}]\n\nreturn msg;",
+        "func": "msg.collection = msg.topic.replace('/', '.');\n\n//payload can be a boolean string or a float string\nlet value = parseFloat(msg.payload)\nif(isNaN(value)) {\n    value = msg.payload == \"True\";\n}\n\nmsg.payload = [{\n    \"value\": value,\n    \"date\": new Date()\n}]\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2040,6 +2086,87 @@
         "className": "",
         "x": 790,
         "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4ce8bdcbbab4a24c",
+        "type": "http in",
+        "z": "fd35b625aa6945db",
+        "name": "",
+        "url": "okeh",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 120,
+        "wires": [
+            [
+                "6c1d06049a615b38"
+            ]
+        ]
+    },
+    {
+        "id": "6c1d06049a615b38",
+        "type": "function",
+        "z": "fd35b625aa6945db",
+        "name": "function 1",
+        "func": "msg.url = \"okeh\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 120,
+        "wires": [
+            [
+                "41f2d10e8178293c"
+            ]
+        ]
+    },
+    {
+        "id": "41f2d10e8178293c",
+        "type": "template",
+        "z": "fd35b625aa6945db",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "mustache",
+        "template": "<h1>Set Vaporizer Power<h1>\n<div>\n    <input type=\"number\" min=\"10\" max=\"100\"/>\n</div>",
+        "output": "str",
+        "x": 540,
+        "y": 120,
+        "wires": [
+            [
+                "7436f53ae078a9f2"
+            ]
+        ]
+    },
+    {
+        "id": "7436f53ae078a9f2",
+        "type": "http response",
+        "z": "fd35b625aa6945db",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 740,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "f0c80a3ef7a18e11",
+        "type": "http in",
+        "z": "fd35b625aa6945db",
+        "name": "",
+        "url": "okeh",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 280,
         "wires": [
             []
         ]
