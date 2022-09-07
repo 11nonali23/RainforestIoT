@@ -2099,7 +2099,7 @@
         "type": "function",
         "z": "106add133c103307",
         "name": "QueryAvgHumidity",
-        "func": "msg.collection = \"env.humidity\"\nmsg.operation = \"aggregate\"\nmsg.payload = [[\n    {\n        $match: {\n            \"date\": {\n                \"$gte\": new Date(\"2022-09-01T00:00:00.000Z\"),\n                \"$lt\": new Date(\"2022-09-02T00:00:00.000Z\")\n            }\n        }\n    },\n    {\n        $group: { _id: \"avg\", avg: { $avg: \"$value\" } }\n    }\n]\n]\nreturn msg;",
+        "func": "msg.collection = \"env.humidity\"\nmsg.operation = \"aggregate\"\n\nlet today = new Date()\ntoday.setHours(0, 0, 0, 0);\nlet tomorrow = new Date(today)\ntomorrow.setDate(tomorrow.getDate() + 1)\n\nmsg.payload = [[\n    {\n        $match: {\n            \"date\": {\n                \"$gte\": today,\n                \"$lt\": tomorrow\n            }\n        }\n    },\n    {\n        $group: { _id: \"avg\", avg: { $avg: \"$value\" } }\n    }\n]\n]\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2161,11 +2161,28 @@
         "wires": []
     },
     {
+        "id": "6a3073bacd124cd2",
+        "type": "mongodb4",
+        "z": "106add133c103307",
+        "clientNode": "37e20789b639f60a",
+        "collection": "",
+        "operation": "",
+        "output": "toArray",
+        "name": "Query",
+        "x": 610,
+        "y": 240,
+        "wires": [
+            [
+                "b11171805ac80d11"
+            ]
+        ]
+    },
+    {
         "id": "dadac1264f0dac74",
         "type": "function",
         "z": "106add133c103307",
         "name": "QueryAvgSoilMoisture",
-        "func": "msg.collection = \"env.soilMoisture\"\nmsg.operation = \"aggregate\"\nmsg.payload = [[\n    {\n        $match: {\n            \"date\": {\n                \"$gte\": new Date(\"2022-09-01T00:00:00.000Z\"),\n                \"$lt\": new Date(\"2022-09-02T00:00:00.000Z\")\n            }\n        }\n    },\n    {\n        $group: { _id: \"avg\", avg: { $avg: \"$value\" } }\n    }\n]\n]\nreturn msg;",
+        "func": "msg.collection = \"env.soilMoisture\"\nmsg.operation = \"aggregate\"\n\nlet today = new Date()\ntoday.setHours(0, 0, 0, 0);\nlet tomorrow = new Date(today)\ntomorrow.setDate(tomorrow.getDate() + 1)\n\nmsg.payload = [[\n    {\n        $match: {\n            \"date\": {\n                \"$gte\": today,\n                \"$lt\": tomorrow\n            }\n        }\n    },\n    {\n        $group: { _id: \"avg\", avg: { $avg: \"$value\" } }\n    }\n]\n]\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2184,7 +2201,7 @@
         "type": "function",
         "z": "106add133c103307",
         "name": "QueryAvgHeartRate",
-        "func": "msg.collection = \"birds.health\"\nmsg.operation = \"aggregate\"\n\nlet today = new Date()\ntoday.setHours(0, 0, 0, 0);\nlet tomorrow = new Date(today)\ntomorrow.setDate(tomorrow.getDate() + 1)\n\nmsg.payload = [[\n    {\n        $match: {\n            \"date\": {\n                \"$gte\": new Date(\"2022-09-01T00:00:00.000Z\"),\n                \"$lt\": new Date(\"2022-09-02T00:00:00.000Z\")\n            }\n        }\n    },\n    {\n        $group: { _id: \"$name\", avg: { $avg: \"$hb\" } }\n    }\n]\n]\nreturn msg;",
+        "func": "msg.collection = \"birds.health\"\nmsg.operation = \"aggregate\"\n\nlet today = new Date()\ntoday.setHours(0, 0, 0, 0);\nlet tomorrow = new Date(today)\ntomorrow.setDate(tomorrow.getDate() + 1)\n\nmsg.payload = [[\n    {\n        $match: {\n            \"date\": {\n                \"$gte\": today,\n                \"$lt\": tomorrow\n            }\n        }\n    },\n    {\n        $group: { _id: \"$name\", avg: { $avg: \"$hb\" } }\n    }\n]\n]\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2203,7 +2220,7 @@
         "type": "function",
         "z": "106add133c103307",
         "name": "QueryAvgBodyTemp",
-        "func": "msg.collection = \"birds.health\";\nmsg.operation = \"aggregate\";\n\nlet today = new Date()\ntoday.setHours(0, 0, 0, 0);\nlet tomorrow = new Date(today)\ntomorrow.setDate(tomorrow.getDate() + 1)\n\nmsg.payload = [[\n    {\n        $match: {\n            \"date\": {\n                \"$gte\": new Date(\"2022-09-01T00:00:00.000Z\"),\n                \"$lt\": new Date(\"2022-09-02T00:00:00.000Z\")\n            }\n        }\n    },\n    {\n        $group: { _id: \"$name\", avg: { $avg: \"$body_tem\" } }\n    }\n]\n]\nreturn msg;",
+        "func": "msg.collection = \"birds.health\";\nmsg.operation = \"aggregate\";\n\nlet today = new Date()\ntoday.setHours(0, 0, 0, 0);\nlet tomorrow = new Date(today)\ntomorrow.setDate(tomorrow.getDate() + 1)\n\nmsg.payload = [[\n    {\n        $match: {\n            \"date\": {\n                \"$gte\": today,\n                \"$lt\": tomorrow\n            }\n        }\n    },\n    {\n        $group: { _id: \"$name\", avg: { $avg: \"$body_tem\" } }\n    }\n]\n]\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2351,40 +2368,6 @@
         ]
     },
     {
-        "id": "72fc73e4adf9841f",
-        "type": "mongodb4",
-        "z": "106add133c103307",
-        "clientNode": "37e20789b639f60a",
-        "collection": "",
-        "operation": "",
-        "output": "toArray",
-        "name": "Query",
-        "x": 610,
-        "y": 80,
-        "wires": [
-            [
-                "98b1db14435045f0"
-            ]
-        ]
-    },
-    {
-        "id": "6a3073bacd124cd2",
-        "type": "mongodb4",
-        "z": "106add133c103307",
-        "clientNode": "37e20789b639f60a",
-        "collection": "",
-        "operation": "",
-        "output": "toArray",
-        "name": "Query",
-        "x": 610,
-        "y": 240,
-        "wires": [
-            [
-                "b11171805ac80d11"
-            ]
-        ]
-    },
-    {
         "id": "d28f9a6ce42cfe0f",
         "type": "mongodb4",
         "z": "106add133c103307",
@@ -2432,6 +2415,23 @@
         "wires": [
             [
                 "7f1553fdeb5661f2"
+            ]
+        ]
+    },
+    {
+        "id": "72fc73e4adf9841f",
+        "type": "mongodb4",
+        "z": "106add133c103307",
+        "clientNode": "37e20789b639f60a",
+        "collection": "",
+        "operation": "",
+        "output": "toArray",
+        "name": "Query",
+        "x": 610,
+        "y": 80,
+        "wires": [
+            [
+                "98b1db14435045f0"
             ]
         ]
     }
