@@ -40,9 +40,9 @@
         "env": []
     },
     {
-        "id": "fd35b625aa6945db",
+        "id": "106add133c103307",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "QueryVisualization",
         "disabled": false,
         "info": "",
         "env": []
@@ -385,6 +385,7 @@
         "id": "f2ab153059d0565d",
         "type": "inject",
         "z": "f87284aad6864f17",
+        "d": true,
         "name": "Water Vaporizer",
         "props": [
             {
@@ -395,14 +396,14 @@
                 "vt": "str"
             }
         ],
-        "repeat": "",
+        "repeat": "3",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 160,
+        "x": 170,
         "y": 80,
         "wires": [
             [
@@ -849,6 +850,7 @@
         "id": "534be8a0a43726c4",
         "type": "inject",
         "z": "c006e20c144742db",
+        "d": true,
         "name": "SoilMoisture",
         "props": [
             {
@@ -859,7 +861,7 @@
                 "vt": "str"
             }
         ],
-        "repeat": "",
+        "repeat": "3",
         "crontab": "",
         "once": false,
         "onceDelay": "0.5",
@@ -1107,6 +1109,7 @@
         "id": "f5ef54eea0985e4a",
         "type": "inject",
         "z": "a9d611e430e24fc7",
+        "d": true,
         "name": "HealthParams",
         "props": [
             {
@@ -1117,14 +1120,14 @@
                 "vt": "str"
             }
         ],
-        "repeat": "",
+        "repeat": "3",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 150,
+        "x": 160,
         "y": 80,
         "wires": [
             [
@@ -1392,6 +1395,7 @@
         "id": "9efea2155ff54c04",
         "type": "inject",
         "z": "1f6ef931d2586798",
+        "d": true,
         "name": "AnimalCoords",
         "props": [
             {
@@ -1402,14 +1406,14 @@
                 "vt": "str"
             }
         ],
-        "repeat": "",
+        "repeat": "3",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 150,
+        "x": 160,
         "y": 80,
         "wires": [
             [
@@ -1736,7 +1740,7 @@
         "type": "file",
         "z": "21cfc9c1db49869b",
         "name": "LogErrors",
-        "filename": "errors_log",
+        "filename": "/Users/andreanonali/Desktop/errors_log",
         "filenameType": "str",
         "appendNewline": true,
         "createDir": false,
@@ -2020,9 +2024,9 @@
         "dot": false,
         "ymin": "",
         "ymax": "",
-        "removeOlder": 1,
+        "removeOlder": "1",
         "removeOlderPoints": "",
-        "removeOlderUnit": "3600",
+        "removeOlderUnit": "60",
         "cutout": 0,
         "useOneColor": false,
         "useUTC": false,
@@ -2066,7 +2070,7 @@
         "ymax": "",
         "removeOlder": 1,
         "removeOlderPoints": "",
-        "removeOlderUnit": "3600",
+        "removeOlderUnit": "60",
         "cutout": 0,
         "useOneColor": false,
         "useUTC": false,
@@ -2091,84 +2095,344 @@
         ]
     },
     {
-        "id": "4ce8bdcbbab4a24c",
-        "type": "http in",
-        "z": "fd35b625aa6945db",
-        "name": "",
-        "url": "okeh",
-        "method": "get",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 180,
-        "y": 120,
-        "wires": [
-            [
-                "6c1d06049a615b38"
-            ]
-        ]
-    },
-    {
-        "id": "6c1d06049a615b38",
+        "id": "1ad73b7551e17aeb",
         "type": "function",
-        "z": "fd35b625aa6945db",
-        "name": "function 1",
-        "func": "msg.url = \"okeh\"\nreturn msg;",
+        "z": "106add133c103307",
+        "name": "QueryAvgHumidity",
+        "func": "msg.collection = \"env.humidity\"\nmsg.operation = \"aggregate\"\nmsg.payload = [[\n    {\n        $match: {\n            \"date\": {\n                \"$gte\": new Date(\"2022-09-01T00:00:00.000Z\"),\n                \"$lt\": new Date(\"2022-09-02T00:00:00.000Z\")\n            }\n        }\n    },\n    {\n        $group: { _id: \"avg\", avg: { $avg: \"$value\" } }\n    }\n]\n]\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 340,
-        "y": 120,
+        "x": 390,
+        "y": 160,
         "wires": [
             [
-                "41f2d10e8178293c"
+                "30c906450c023bc1"
             ]
         ]
     },
     {
-        "id": "41f2d10e8178293c",
+        "id": "c91e93e874c77a88",
+        "type": "http in",
+        "z": "106add133c103307",
+        "name": "get/QueryVisualization",
+        "url": "queries",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 80,
+        "wires": [
+            [
+                "3ed6d0f2e49823a8"
+            ]
+        ]
+    },
+    {
+        "id": "3ed6d0f2e49823a8",
+        "type": "function",
+        "z": "106add133c103307",
+        "name": "QueryUserPresence",
+        "func": "msg.collection = \"env.userPresence\";\nmsg.operation = \"count\";\n\nlet today = new Date()\ntoday.setHours(0, 0, 0, 0);\nlet tomorrow = new Date(today)\ntomorrow.setDate(tomorrow.getDate() + 1)\n\nmsg.payload = [{\n    \"date\" : {\n    \"$gte\": today,\n    \"$lt\": tomorrow\n}}]\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 80,
+        "wires": [
+            [
+                "72fc73e4adf9841f"
+            ]
+        ]
+    },
+    {
+        "id": "b102f2436b5c93de",
+        "type": "http response",
+        "z": "106add133c103307",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 780,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "dadac1264f0dac74",
+        "type": "function",
+        "z": "106add133c103307",
+        "name": "QueryAvgSoilMoisture",
+        "func": "msg.collection = \"env.soilMoisture\"\nmsg.operation = \"aggregate\"\nmsg.payload = [[\n    {\n        $match: {\n            \"date\": {\n                \"$gte\": new Date(\"2022-09-01T00:00:00.000Z\"),\n                \"$lt\": new Date(\"2022-09-02T00:00:00.000Z\")\n            }\n        }\n    },\n    {\n        $group: { _id: \"avg\", avg: { $avg: \"$value\" } }\n    }\n]\n]\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 240,
+        "wires": [
+            [
+                "6a3073bacd124cd2"
+            ]
+        ]
+    },
+    {
+        "id": "df2e2237fd75fdd5",
+        "type": "function",
+        "z": "106add133c103307",
+        "name": "QueryAvgHeartRate",
+        "func": "msg.collection = \"birds.health\"\nmsg.operation = \"aggregate\"\n\nlet today = new Date()\ntoday.setHours(0, 0, 0, 0);\nlet tomorrow = new Date(today)\ntomorrow.setDate(tomorrow.getDate() + 1)\n\nmsg.payload = [[\n    {\n        $match: {\n            \"date\": {\n                \"$gte\": new Date(\"2022-09-01T00:00:00.000Z\"),\n                \"$lt\": new Date(\"2022-09-02T00:00:00.000Z\")\n            }\n        }\n    },\n    {\n        $group: { _id: \"$name\", avg: { $avg: \"$hb\" } }\n    }\n]\n]\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 320,
+        "wires": [
+            [
+                "dbdf6dcacaeb02a8"
+            ]
+        ]
+    },
+    {
+        "id": "0cfbf450a64d90bb",
+        "type": "function",
+        "z": "106add133c103307",
+        "name": "QueryAvgBodyTemp",
+        "func": "msg.collection = \"birds.health\";\nmsg.operation = \"aggregate\";\n\nlet today = new Date()\ntoday.setHours(0, 0, 0, 0);\nlet tomorrow = new Date(today)\ntomorrow.setDate(tomorrow.getDate() + 1)\n\nmsg.payload = [[\n    {\n        $match: {\n            \"date\": {\n                \"$gte\": new Date(\"2022-09-01T00:00:00.000Z\"),\n                \"$lt\": new Date(\"2022-09-02T00:00:00.000Z\")\n            }\n        }\n    },\n    {\n        $group: { _id: \"$name\", avg: { $avg: \"$body_tem\" } }\n    }\n]\n]\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 400,
+        "wires": [
+            [
+                "d28f9a6ce42cfe0f"
+            ]
+        ]
+    },
+    {
+        "id": "98b1db14435045f0",
+        "type": "function",
+        "z": "106add133c103307",
+        "name": "FormatResult",
+        "func": "msg.result = {}\n\nif (typeof msg.payload === 'undefined'){\n    msg.result.userCount = \"no values found\"\n    return msg;\n}\n    \nmsg.result.userCount = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 80,
+        "wires": [
+            [
+                "1ad73b7551e17aeb"
+            ]
+        ]
+    },
+    {
+        "id": "7f1553fdeb5661f2",
+        "type": "function",
+        "z": "106add133c103307",
+        "name": "FormatResult",
+        "func": "if (typeof msg.payload === 'undefined') {\n    msg.result.avgHumidity = \"no values found\"\n    return msg;\n}\n    \nmsg.result.avgHumidity = msg.payload[0].avg;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 160,
+        "wires": [
+            [
+                "dadac1264f0dac74"
+            ]
+        ]
+    },
+    {
+        "id": "b11171805ac80d11",
+        "type": "function",
+        "z": "106add133c103307",
+        "name": "FormatResult",
+        "func": "if (typeof msg.payload === 'undefined') {\n    msg.result.avgSoilMoisture = \"no values found\"\n    return msg;\n}\n    \nmsg.result.avgSoilMoisture = msg.payload[0].avg;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 240,
+        "wires": [
+            [
+                "df2e2237fd75fdd5"
+            ]
+        ]
+    },
+    {
+        "id": "dcbad729d579ae4c",
+        "type": "function",
+        "z": "106add133c103307",
+        "name": "FormatResult",
+        "func": "if (typeof msg.payload === 'undefined') {\n    msg.result.avgHeartRate1 = \"no values found\"\n    msg.result.avgHeartRate2 = \"no values found\"\n    msg.result.avgHeartRate3 = \"no values found\"\n    return msg;\n}\n    \nmsg.result.avgHeartRate1 = msg.payload[0].avg\nmsg.result.avgHeartRate2 = msg.payload[1].avg\nmsg.result.avgHeartRate3 = msg.payload[2].avg\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 320,
+        "wires": [
+            [
+                "0cfbf450a64d90bb"
+            ]
+        ]
+    },
+    {
+        "id": "edc3f38401f67ad6",
+        "type": "function",
+        "z": "106add133c103307",
+        "name": "FormatResult",
+        "func": "if (typeof msg.payload === 'undefined') {\n    msg.result.avgBodyTemp1 = \"no values found\"\n    msg.result.avgBodyTemp2 = \"no values found\"\n    msg.result.avgBodyTemp3 = \"no values found\"\n    return msg;\n}\n\nmsg.result.avgBodyTemp1 = msg.payload[0].avg;\nmsg.result.avgBodyTemp2 = msg.payload[1].avg;\nmsg.result.avgBodyTemp3 = msg.payload[2].avg;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 400,
+        "wires": [
+            [
+                "e8f3b5425c940ccb"
+            ]
+        ]
+    },
+    {
+        "id": "810656d86dcb33fc",
         "type": "template",
-        "z": "fd35b625aa6945db",
+        "z": "106add133c103307",
         "name": "",
         "field": "payload",
         "fieldType": "msg",
         "format": "html",
         "syntax": "mustache",
-        "template": "<h1>Set Vaporizer Power<h1>\n<div>\n    <input type=\"number\" min=\"10\" max=\"100\"/>\n</div>",
+        "template": "<!DOCTYPE html>\n<body>\n    <h1>Query Visualization</h1>\n    <h3>Users passed under water vaporizer</h3>\n    <p>{{payload.userCount}}</p>\n\n    <h3>Avg humidity</h3>\n    <p>{{payload.avgHumidity}}</p>\n\n    <h3>Avg soilMoisture</h3>\n    <p>{{payload.avgSoilMoisture}}</p>\n\n    <h3>Avg heart rate</h3>\n    <p>Bird1: {{payload.avgHeartRate1}}</p>\n    <p>Bird2: {{payload.avgHeartRate2}}</p>\n    <p>Bird3: {{payload.avgHeartRate3}}</p>\n\n    <h3>Avg Body Temperature</h3>\n    <p>Bird1: {{payload.avgBodyTemp1}}</p>\n    <p>Bird2: {{payload.avgBodyTemp2}}</p>\n    <p>Bird3: {{payload.avgBodyTemp3}}</p>\n</body>\n\n<style>\n    body {\n        background-color: #d3d3d3;\n    }\n\n    h1 {\n        color: blue;\n    }\n\n    p {\n        color: red;\n    }\n</style>",
         "output": "str",
-        "x": 540,
-        "y": 120,
+        "x": 360,
+        "y": 580,
         "wires": [
             [
-                "7436f53ae078a9f2"
+                "b102f2436b5c93de"
             ]
         ]
     },
     {
-        "id": "7436f53ae078a9f2",
-        "type": "http response",
-        "z": "fd35b625aa6945db",
-        "name": "",
-        "statusCode": "200",
-        "headers": {},
-        "x": 740,
-        "y": 120,
-        "wires": []
+        "id": "e8f3b5425c940ccb",
+        "type": "function",
+        "z": "106add133c103307",
+        "name": "SetPayload",
+        "func": "msg.payload = msg.result\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 480,
+        "wires": [
+            [
+                "810656d86dcb33fc"
+            ]
+        ]
     },
     {
-        "id": "f0c80a3ef7a18e11",
-        "type": "http in",
-        "z": "fd35b625aa6945db",
-        "name": "",
-        "url": "okeh",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 190,
-        "y": 280,
+        "id": "72fc73e4adf9841f",
+        "type": "mongodb4",
+        "z": "106add133c103307",
+        "clientNode": "37e20789b639f60a",
+        "collection": "",
+        "operation": "",
+        "output": "toArray",
+        "name": "Query",
+        "x": 610,
+        "y": 80,
         "wires": [
-            []
+            [
+                "98b1db14435045f0"
+            ]
+        ]
+    },
+    {
+        "id": "6a3073bacd124cd2",
+        "type": "mongodb4",
+        "z": "106add133c103307",
+        "clientNode": "37e20789b639f60a",
+        "collection": "",
+        "operation": "",
+        "output": "toArray",
+        "name": "Query",
+        "x": 610,
+        "y": 240,
+        "wires": [
+            [
+                "b11171805ac80d11"
+            ]
+        ]
+    },
+    {
+        "id": "d28f9a6ce42cfe0f",
+        "type": "mongodb4",
+        "z": "106add133c103307",
+        "clientNode": "37e20789b639f60a",
+        "collection": "",
+        "operation": "",
+        "output": "toArray",
+        "name": "Query",
+        "x": 610,
+        "y": 400,
+        "wires": [
+            [
+                "edc3f38401f67ad6"
+            ]
+        ]
+    },
+    {
+        "id": "dbdf6dcacaeb02a8",
+        "type": "mongodb4",
+        "z": "106add133c103307",
+        "clientNode": "37e20789b639f60a",
+        "collection": "",
+        "operation": "",
+        "output": "toArray",
+        "name": "Query",
+        "x": 610,
+        "y": 320,
+        "wires": [
+            [
+                "dcbad729d579ae4c"
+            ]
+        ]
+    },
+    {
+        "id": "30c906450c023bc1",
+        "type": "mongodb4",
+        "z": "106add133c103307",
+        "clientNode": "37e20789b639f60a",
+        "collection": "",
+        "operation": "",
+        "output": "toArray",
+        "name": "Query",
+        "x": 610,
+        "y": 160,
+        "wires": [
+            [
+                "7f1553fdeb5661f2"
+            ]
         ]
     }
 ]
