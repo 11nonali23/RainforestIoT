@@ -21,7 +21,7 @@ db.env.humidity.aggregate([
     }
 ])
 
-//get the avg heart rate and body temperature for each bird type on a time frame
+//get the avg heart rate or body temperature for each bird type on a time frame
 db.birds.health.aggregate([
     {
         $match: {
@@ -56,18 +56,18 @@ db.birds.health.find({
 
 //get birds that are out of boundaries
 db.birds.coords.find({
-    $or: [
+    "$or": [
         {
-            lat: {
-                $lt: 40,
-                $gt: 50
+            "lat": {
+                "$lt": 40,
+                "$gt": 50
 
             }
         },
         {
-            lon: {
-                $lt: 40,
-                $gt: 50
+            "lon": {
+                "$lt": 40,
+                "$gt": 50
             }
         }
     ]
