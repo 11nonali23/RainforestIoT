@@ -385,7 +385,6 @@
         "id": "f2ab153059d0565d",
         "type": "inject",
         "z": "f87284aad6864f17",
-        "d": true,
         "name": "Water Vaporizer",
         "props": [
             {
@@ -850,7 +849,6 @@
         "id": "534be8a0a43726c4",
         "type": "inject",
         "z": "c006e20c144742db",
-        "d": true,
         "name": "SoilMoisture",
         "props": [
             {
@@ -1109,7 +1107,6 @@
         "id": "f5ef54eea0985e4a",
         "type": "inject",
         "z": "a9d611e430e24fc7",
-        "d": true,
         "name": "HealthParams",
         "props": [
             {
@@ -1395,7 +1392,6 @@
         "id": "9efea2155ff54c04",
         "type": "inject",
         "z": "1f6ef931d2586798",
-        "d": true,
         "name": "AnimalCoords",
         "props": [
             {
