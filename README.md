@@ -10,4 +10,4 @@ IoT simulated system that aims to preserve the environment and the bird species 
  * MQTT
  
  # Paper 
- You can read the paper for this work.
+ You can read the paper for a better view on this project, and to see the Nodered flows implementation.
